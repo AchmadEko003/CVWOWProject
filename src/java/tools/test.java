@@ -21,7 +21,8 @@ public class test {
         UserInterface ui = new UserController(factory);
 //            System.out.println(emp.insert("222", "a", "b", "fsfes", "2301293", "08/08/2009", "IT_PROG", "5000", "0.0", "100", "100"));
 //        System.out.println(emp.getById("220"));
-        System.out.println(ui.search(""));
+        System.out.println(ui.register("ekoa","achmadawd@gmail.com","wkaoddwa3"));
+        System.out.println(ui.search("1"));
 //            for (Object emp2 : emp.search("")) {
 //                Regions en = (Regions) emp2;
 //                System.out.println(en.getRegionName());

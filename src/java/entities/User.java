@@ -35,16 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
     , @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
-    , @NamedQuery(name = "User.findByNama", query = "SELECT u FROM User u WHERE u.nama = :nama")
-    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
-    , @NamedQuery(name = "User.findByRoleId", query = "SELECT u FROM User u WHERE u.roleId = :roleId")})
+    , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")})
 public class User implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
-    private List<UserProfile> userProfileList;
-    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Role roleId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,8 +46,8 @@ public class User implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "NAMA")
-    private String nama;
+    @Column(name = "USERNAME")
+    private String username;
     @Basic(optional = false)
     @Column(name = "EMAIL")
     private String email;
@@ -62,9 +55,15 @@ public class User implements Serializable {
     @Lob
     @Column(name = "PASSWORD")
     private String password;
-    @Basic(optional = false)
-    @Column(name = "ROLE_ID")
-    private int rolesId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
+    private List<Apply> applyList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
+    private List<UserProfile> userProfileList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
+    private List<LowonganPekerjaan> lowonganPekerjaanList;
+    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Role roleId;
 
     public User() {
     }
@@ -73,12 +72,26 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String nama, String email, String password, int roleId) {
+    public User(Integer id, String username, String email, String password) {
         this.id = id;
-        this.nama = nama;
+        this.username = username;
         this.email = email;
         this.password = password;
-        this.rolesId = roleId;
+    }
+
+    public User(Integer id, String username, String email, String password, Role roleId) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roleId = roleId;
+    }
+
+    public User(String username, String email, String password, Role roleId) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roleId = roleId;
     }
 
     public Integer getId() {
@@ -89,12 +102,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getNama() {
-        return nama;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -113,12 +126,39 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getRoleId() {
-        return rolesId;
+    @XmlTransient
+    public List<Apply> getApplyList() {
+        return applyList;
     }
 
-    public void setRoleId(int roleId) {
-        this.rolesId = roleId;
+    public void setApplyList(List<Apply> applyList) {
+        this.applyList = applyList;
+    }
+
+    @XmlTransient
+    public List<UserProfile> getUserProfileList() {
+        return userProfileList;
+    }
+
+    public void setUserProfileList(List<UserProfile> userProfileList) {
+        this.userProfileList = userProfileList;
+    }
+
+    @XmlTransient
+    public List<LowonganPekerjaan> getLowonganPekerjaanList() {
+        return lowonganPekerjaanList;
+    }
+
+    public void setLowonganPekerjaanList(List<LowonganPekerjaan> lowonganPekerjaanList) {
+        this.lowonganPekerjaanList = lowonganPekerjaanList;
+    }
+
+    public Role getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Role roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -145,13 +185,5 @@ public class User implements Serializable {
     public String toString() {
         return "entities.User[ id=" + id + " ]";
     }
-
-    @XmlTransient
-    public List<UserProfile> getUserProfileList() {
-        return userProfileList;
-    }
-
-    public void setUserProfileList(List<UserProfile> userProfileList) {
-        this.userProfileList = userProfileList;
-    }
+    
 }

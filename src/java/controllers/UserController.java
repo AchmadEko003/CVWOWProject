@@ -7,6 +7,7 @@ package controllers;
 
 import daos.DAOInterface;
 import daos.GeneralDAO;
+import entities.Role;
 import entities.User;
 import interfaces.UserInterface;
 import java.util.List;
@@ -34,6 +35,26 @@ public class UserController implements UserInterface {
     @Override
     public List<Object> search(String keyword) {
         return daoid.doDDL(new User(), keyword);
+    }
+
+    @Override
+    public boolean register(String nama, String email, String password) {
+        boolean hasil = false;
+        try {
+//            Integer a = daoid.doDDL(new Users(), "").size()+1;
+            User use = new User(nama, email, password, new Role(1));
+            if (daoid.doDML(use, false)) {
+                hasil = true;
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return hasil;
+    }
+
+    @Override
+    public boolean login(Object nama, String password) {
+        return this.daoid.login(nama, password);
     }
 
 }

@@ -18,8 +18,13 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Icon</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
+            <!--            <a class="navbar-brand" href="#">
+                            <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
+                        </a>-->
+            <button type="button" class="btn btn-light">
+                <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
+            </button>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,13 +41,13 @@
                         <a class="nav-link disabled" href="#">Loker</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalCenter">
-                        Login
-                    </button>
-                </form>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModalCenter">
+                            Login
+                        </button>
+                    </li>
+                </ul>
             </div>
         </nav>
 
@@ -68,7 +73,7 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div id="login" class="container tab-pane active"><br>
-                                    <form>
+                                    <form method="POST"  action="../registerServlet">
                                         <div class="form-group">
                                             <i class="fas fa-envelope"></i>
                                             <label for="exampleInputEmail1">Email address</label>
@@ -80,42 +85,120 @@
                                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                         </div>
                                         <div class="form-group">
-                                            <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
+                                            <button type="submit" class="btn btn-info btn-lg btn-block">Login</button>
                                         </div>
                                     </form>
                                 </div>
 
                                 <div id="signUp" class="container tab-pane fade"><br>
-                                    <div class="form-group">
-                                        <i class="fas fa-user"></i>
-                                        <label for="exampleInputEmail1">Name</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="name" placeholder="Name">
-                                    </div>
-                                    <div class="form-group">
-                                        <i class="fas fa-envelope"></i>
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                    </div>
-                                    <div class="form-group">
-                                        <i class="fas fa-lock"></i>
-                                        <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <i class="fas fa-lock"></i>
-                                        <label for="exampleInputPassword1">Confirm Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
-                                    </div>
+                                    <form method="POST" action="registerServlet">
+                                        <div class="form-group">
+                                            <i class="fas fa-user"></i>
+                                            <label for="exampleInputEmail1">Name</label>
+                                            <input name="userName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="name" placeholder="Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <i class="fas fa-envelope"></i>
+                                            <label for="exampleInputEmail1">Email address</label>
+                                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                        </div>
+                                        <div class="form-group">
+                                            <i class="fas fa-lock"></i>
+                                            <label for="exampleInputPassword1">Password</label>
+                                            <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                        </div>
+                                        <!--                                    <div class="form-group">
+                                                                                <i class="fas fa-lock"></i>
+                                                                                <label for="exampleInputPassword1">Confirm Password</label>
+                                                                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                                                                            </div>-->
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-info btn-lg btn-block">Register <i class="fab fa-telegram-plane"></i>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info">Save changes </button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <!--Profile singkat sisi kiri-->
+                <div class="col-sm-4">
+                    <div class="card" style="margin-top: 10px;">
+                        <img src="./Assets/Foto 3x4 Eko.jpg" class="rounded-circle" alt="Card image cap" width="232" height="236" style="margin-left: 60px; margin-top: 20px">
+                        <div class="card-body">
+                            <h5 class="card-title">Nama</h5>
+                            <p class="card-text">Profil singkat</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h5><i class="fas fa-language"></i> Bahasa</h5><br>
+                                <p>Ini isinya</p>
+                            </li>
+                            <li class="list-group-item">
+                                <h5><i class="fas fa-certificate"></i> Sertifikat</h5><br>
+                                <p>Ini isinya</p>
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                    <hr class="d-sm-none">
+                    <br>
+                </div>
+                <div class="col-sm-8">
+                    <div class="card bg-light mb-3" style="margin-top: 10px;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-graduation-cap"></i> Pendidikan</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Light card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <hr>
+                            <h5 class="card-title">Light card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                    <div class="card bg-light mb-3" style="margin-top: 10px;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-briefcase"></i> Pengalaman</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Light card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                    <div class="card bg-light mb-3" style="margin-top: 10px;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-sliders-h"></i> Keahlian</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Light card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                    <div class="card bg-light mb-3" style="margin-top: 10px;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-tasks"></i> Project</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Light card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="jumbotron text-center" style="margin-bottom:0">
+            <p>Footer</p>
         </div>
     </body>
 </html>

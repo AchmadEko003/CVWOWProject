@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface UserInterface {
     public List<Object> search(String keyword);
+    public boolean register(String nama, String email, String password);
+    public boolean login(Object nama, String password);
 }

@@ -7,7 +7,9 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,10 +21,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "UserProfile.findAll", query = "SELECT u FROM UserProfile u")
     , @NamedQuery(name = "UserProfile.findById", query = "SELECT u FROM UserProfile u WHERE u.id = :id")
+    , @NamedQuery(name = "UserProfile.findByNama", query = "SELECT u FROM UserProfile u WHERE u.nama = :nama")
     , @NamedQuery(name = "UserProfile.findByUmur", query = "SELECT u FROM UserProfile u WHERE u.umur = :umur")
     , @NamedQuery(name = "UserProfile.findByTanggalLahir", query = "SELECT u FROM UserProfile u WHERE u.tanggalLahir = :tanggalLahir")
     , @NamedQuery(name = "UserProfile.findByNoTelpon", query = "SELECT u FROM UserProfile u WHERE u.noTelpon = :noTelpon")})
@@ -45,6 +50,9 @@ public class UserProfile implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Basic(optional = false)
+    @Column(name = "NAMA")
+    private String nama;
     @Basic(optional = false)
     @Column(name = "UMUR")
     private int umur;
@@ -71,9 +79,24 @@ public class UserProfile implements Serializable {
     @Lob
     @Column(name = "KTP")
     private byte[] ktp;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
+    private List<Pencapaian> pencapaianList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
+    private List<Project> projectList;
+    @JoinColumn(name = "BAHASA_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Bahasa bahasaId;
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
+    private List<Keahlian> keahlianList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
+    private List<Sertifikat> sertifikatList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
+    private List<RiwayatPendidikan> riwayatPendidikanList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
+    private List<Pengalaman> pengalamanList;
 
     public UserProfile() {
     }
@@ -82,8 +105,9 @@ public class UserProfile implements Serializable {
         this.id = id;
     }
 
-    public UserProfile(Integer id, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp) {
+    public UserProfile(Integer id, String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp) {
         this.id = id;
+        this.nama = nama;
         this.umur = umur;
         this.alamat = alamat;
         this.tanggalLahir = tanggalLahir;
@@ -99,6 +123,14 @@ public class UserProfile implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public int getUmur() {
@@ -157,12 +189,74 @@ public class UserProfile implements Serializable {
         this.ktp = ktp;
     }
 
+    @XmlTransient
+    public List<Pencapaian> getPencapaianList() {
+        return pencapaianList;
+    }
+
+    public void setPencapaianList(List<Pencapaian> pencapaianList) {
+        this.pencapaianList = pencapaianList;
+    }
+
+    @XmlTransient
+    public List<Project> getProjectList() {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+
+    public Bahasa getBahasaId() {
+        return bahasaId;
+    }
+
+    public void setBahasaId(Bahasa bahasaId) {
+        this.bahasaId = bahasaId;
+    }
+
     public User getUserId() {
         return userId;
     }
 
     public void setUserId(User userId) {
         this.userId = userId;
+    }
+
+    @XmlTransient
+    public List<Keahlian> getKeahlianList() {
+        return keahlianList;
+    }
+
+    public void setKeahlianList(List<Keahlian> keahlianList) {
+        this.keahlianList = keahlianList;
+    }
+
+    @XmlTransient
+    public List<Sertifikat> getSertifikatList() {
+        return sertifikatList;
+    }
+
+    public void setSertifikatList(List<Sertifikat> sertifikatList) {
+        this.sertifikatList = sertifikatList;
+    }
+
+    @XmlTransient
+    public List<RiwayatPendidikan> getRiwayatPendidikanList() {
+        return riwayatPendidikanList;
+    }
+
+    public void setRiwayatPendidikanList(List<RiwayatPendidikan> riwayatPendidikanList) {
+        this.riwayatPendidikanList = riwayatPendidikanList;
+    }
+
+    @XmlTransient
+    public List<Pengalaman> getPengalamanList() {
+        return pengalamanList;
+    }
+
+    public void setPengalamanList(List<Pengalaman> pengalamanList) {
+        this.pengalamanList = pengalamanList;
     }
 
     @Override
