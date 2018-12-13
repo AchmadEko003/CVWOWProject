@@ -50,5 +50,20 @@ Contributor(s):
     <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping class="entities.User"/>
+    <mapping class="entities.Apply"/>
+    <mapping class="entities.Bahasa"/>
+    <mapping class="entities.Jurusan"/>
+    <mapping class="entities.Keahlian"/>
+    <mapping class="entities.LowonganPekerjaan"/>
+    <mapping class="entities.Pencapaian"/>
+    <mapping class="entities.Pengalaman"/>
+    <mapping class="entities.Project"/>
+    <mapping class="entities.Requirements"/>
+    <mapping class="entities.RiwayatPendidikan"/>
+    <mapping class="entities.Role"/>
+    <mapping class="entities.Sertifikat"/>
+    <mapping class="entities.Universitas"/>
+    <mapping class="entities.User"/>
+    <mapping class="entities.UserProfile"/>
   </session-factory>
 </hibernate-configuration>
