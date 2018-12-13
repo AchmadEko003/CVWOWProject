@@ -155,7 +155,7 @@ public class FunctionDAO {
 
     public User login(Object user) {
         User object = null;
-        String query = "from Users where nama= '" + user + "'" ;
+        String query = "from User where email= '" + user + "'" ;
         System.out.println(query);
         try {
             session = factory.openSession();
