@@ -4,6 +4,7 @@
     Author     : Nitani
 --%>
 
+<%@page import="entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,15 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     </head>
-    <body>
+    <body class="bg-light">
+        <% String idUser = "", emails = "", role = "";
+            if (session.getAttribute("userData") != null) {
+                User r = (User) session.getAttribute("userData");
+                idUser = r.getId().toString();
+                emails = r.getEmail();
+                role = r.getRoleId().getStatus().toLowerCase();
+            }
+        %>
         <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
             <!--            <a class="navbar-brand" href="#">
                             <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
@@ -32,10 +41,18 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Home</a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
+                        <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Loker</a>
@@ -77,15 +94,15 @@
                                         <div class="form-group">
                                             <i class="fas fa-envelope"></i>
                                             <label for="exampleInputEmail1">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                            <input name="emailsa" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                                         </div>
                                         <div class="form-group">
                                             <i class="fas fa-lock"></i>
                                             <label for="exampleInputPassword1">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                            <input name="passwords" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-info btn-lg btn-block">Login</button>
+                                            <input type="submit" class="btn btn-info btn-lg btn-block">Login
                                         </div>
                                     </form>
                                 </div>
@@ -120,12 +137,17 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
+        
+        <%@include file="Partials/lokerViews.jsp" %>
+        
+        <% if (role.equals("user")) { %>
         <%@include file="Partials/cvView.jsp" %>
+        <% } else if (role.equals("admin")) { %>
+        <%@include file="Partials/userProfileViews.jsp" %>
+        <% }%>
 
         <div class="jumbotron text-center" style="margin-bottom:0">
             <p>Footer</p>
