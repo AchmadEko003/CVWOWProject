@@ -86,7 +86,7 @@
 
                         <td><a class="btn btn-info" id="detail" data-toggle="modal" data-target="#jurusanModal" 
                                value="<%= b.getId()%>" >Edit</a></td>
-                        <td><a href="../DeleteJob?id=<%= b.getId()%>" class="btn btn-warning"
+                        <td><a href="../deleteBahasa?id=<%= b.getId()%>" class="btn btn-warning"
                                onclick="return confirm('Are you sure to delete this data?');">Delete</a></td>
 
                         <%

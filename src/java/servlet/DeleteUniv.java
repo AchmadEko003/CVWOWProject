@@ -5,13 +5,16 @@
  */
 package servlet;
 
+import controllers.ReqController;
 import controllers.UniversitasController;
-import daos.DAOInterface;
-import daos.GeneralDAO;
+import entities.Requirements;
+import entities.Universitas;
+import interfaces.ReqInterface;
 import interfaces.UniversitasInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +25,8 @@ import tools.HibernateUtil;
  *
  * @author Igaz
  */
-public class UnivServlet extends HttpServlet {
+@WebServlet(name = "DeleteUniv", urlPatterns = {"/deleteUniv"})
+public class DeleteUniv extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,13 +40,13 @@ public class UnivServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String id = request.getParameter("id");
         try (PrintWriter out = response.getWriter()) {
-            String nama = request.getParameter("nama");
-            String akreditasi = request.getParameter("akreditasi");
             SessionFactory factory = HibernateUtil.getSessionFactory();
             UniversitasInterface ui = new UniversitasController(factory);
-            ui.insert(nama, akreditasi);
-            response.sendRedirect("view/kelolaPendidikan.jsp");
+            Universitas bhs = (Universitas) ui.getById(new Universitas(), id);
+            ui.delete(id, bhs.getNama(), bhs.getAkreditasi());
+            response.sendRedirect("view/universitasView.jsp");
         }
     }
 

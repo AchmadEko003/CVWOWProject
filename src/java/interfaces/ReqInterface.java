@@ -17,4 +17,8 @@ public interface ReqInterface {
 
     public boolean insert(String nama);
     
+    public Object getById(Object table, Object id);
+    
+    public boolean delete(String id, String nama);
+    
 }

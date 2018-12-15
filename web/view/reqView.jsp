@@ -31,12 +31,12 @@
 
         </div>
         <div class="container form-group">
-            <a class="btn btn-info" id="detail" data-toggle="modal" data-target="#bahasaModal" 
+            <a class="btn btn-info" id="detail" data-toggle="modal" data-target="#reqModal" 
                value="" >Insert</a>
         </div>
 
         <!-- Modal pendidikan-->
-        <div class="modal fade" id="bahasaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="reqModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -46,7 +46,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="../AddBahasa" method="POST">
+                        <form action="../addRequirement" method="POST">
                             <div class="form-group">
                                 <label for="pwd">Input Requirement:</label>
                                 <input type="text" class="form-control" name="nama" id="ipk">
@@ -68,7 +68,7 @@
             <table class="table table-bordered table100">
                 <thead>
                     <tr>
-                        <th>Bahasa</th>
+                        <th>Requirement</th>
                         <th colspan="2">Aksi</th>
                     </tr>
                 </thead>
@@ -86,7 +86,7 @@
 
                         <td><a class="btn btn-info" id="detail" data-toggle="modal" data-target="#jurusanModal" 
                                value="<%= r.getId()%>" >Edit</a></td>
-                        <td><a href="../DeleteJob?id=<%= r.getId()%>" class="btn btn-warning"
+                        <td><a href="../deleteRequirement?id=<%= r.getId()%>" class="btn btn-warning"
                                onclick="return confirm('Are you sure to delete this data?');">Delete</a></td>
 
                         <%

@@ -37,6 +37,8 @@ public class PendidikanController implements PendidikanInterface{
         return daoid.doDatasId(new RiwayatPendidikan(), keyword);
     }
 
+    
+    
     @Override
     public boolean insert(String instansi, String ipk, String jurusanId, String universitasId, String userProfileId) {
         boolean result = false;
@@ -45,7 +47,7 @@ public class PendidikanController implements PendidikanInterface{
             Jurusan j = new Jurusan(Integer.parseInt(jurusanId));
             Universitas univ = new Universitas(Integer.parseInt(universitasId));
             UserProfile up = new UserProfile(Integer.parseInt(userProfileId));
-            RiwayatPendidikan rp = new RiwayatPendidikan(instansi, ipkNew, j, univ, up);
+            RiwayatPendidikan rp = new RiwayatPendidikan(instansi, ipkNew, j, univ, new UserProfile(1));
             if (daoid.doDML(rp, false)) {
                 result = true;
             }
@@ -53,6 +55,11 @@ public class PendidikanController implements PendidikanInterface{
             e.getMessage();
         }
         return result;
+    }
+
+    @Override
+    public List<Object> getAll(String keyword) {
+        return daoid.doDDL(new RiwayatPendidikan(), "");
     }
 
     

@@ -12,7 +12,12 @@ import java.util.List;
  * @author Igaz
  */
 public interface BahasaInterface {
+
     public List<Object> search(String keyword);
 
     public boolean insert(String nama);
+
+    public boolean delete(String id, String nama);
+    
+    public Object getById(Object table, Object id);
 }

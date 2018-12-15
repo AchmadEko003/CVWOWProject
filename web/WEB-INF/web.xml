@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>UnivServlet</servlet-name>
-        <servlet-class>servlet.UnivServlet</servlet-class>
+        <servlet-class>servlet.AddUniversitas</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddJurusan</servlet-name>
@@ -23,6 +23,10 @@
     <servlet>
         <servlet-name>AddPendidikan</servlet-name>
         <servlet-class>servlet.AddPendidikan</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBahasa</servlet-name>
+        <servlet-class>servlet.DeleteBahasa</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>AddPendidikan</servlet-name>
         <url-pattern>/addPendidikan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBahasa</servlet-name>
+        <url-pattern>/deleteBahasa</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

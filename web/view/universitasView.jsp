@@ -45,7 +45,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="../univServlet" method="POST">
+                        <form action="../addUniv" method="POST">
                             <div class="form-group">
                                 <label for="pwd">Input Universitas:</label>
                                 <input type="text" class="form-control" name="nama" id="ipk">
@@ -90,7 +90,7 @@
 
                         <td><a class="btn btn-info" id="detail" data-toggle="modal" data-target="#pendidikanModal" 
                                value="<%= u.getId()%>" >Edit</a></td>
-                        <td><a href="../DeleteJob?id=<%= u.getId()%>" class="btn btn-warning"
+                        <td><a href="../deleteUniv?id=<%= u.getId()%>" class="btn btn-warning"
                                onclick="return confirm('Are you sure to delete this data?');">Delete</a></td>
 
                         <%

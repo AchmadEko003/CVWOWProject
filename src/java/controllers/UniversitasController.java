@@ -7,6 +7,7 @@ package controllers;
 
 import daos.DAOInterface;
 import daos.GeneralDAO;
+import entities.Requirements;
 import entities.Universitas;
 import interfaces.UniversitasInterface;
 import java.util.List;
@@ -48,6 +49,26 @@ public class UniversitasController implements UniversitasInterface{
             e.getMessage();
         }
         return result;
+    }
+
+    @Override
+    public Object getById(Object table, Object id) {
+        return daoid.getById(table, id);
+    }
+
+    @Override
+    public boolean delete(String id, String nama, String akreditasi) {
+        boolean hasil = false;
+        try {
+            int idB = Integer.parseInt(id);
+            Universitas b = new Universitas(idB, nama, akreditasi);
+            if (daoid.doDML(b, true)) {
+                hasil = true;
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return hasil;
     }
     
 }

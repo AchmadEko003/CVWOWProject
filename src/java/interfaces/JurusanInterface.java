@@ -17,4 +17,7 @@ public interface JurusanInterface {
 
     public boolean insert(String nama);
 
+    public boolean delete(String id, String nama);
+    
+    public Object getById(Object table, Object id);
 }

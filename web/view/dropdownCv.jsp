@@ -4,6 +4,22 @@
     Author     : Igaz
 --%>
 
+<%@page import="entities.Bahasa"%>
+<%@page import="controllers.BahasaController"%>
+<%@page import="interfaces.BahasaInterface"%>
+<%@page import="entities.Requirements"%>
+<%@page import="controllers.ReqController"%>
+<%@page import="interfaces.ReqInterface"%>
+<%@page import="entities.Universitas"%>
+<%@page import="controllers.UniversitasController"%>
+<%@page import="interfaces.UniversitasInterface"%>
+<%@page import="entities.Jurusan"%>
+<%@page import="controllers.JurusanController"%>
+<%@page import="interfaces.JurusanInterface"%>
+<%@page import="controllers.PendidikanController"%>
+<%@page import="interfaces.PendidikanInterface"%>
+<%@page import="tools.HibernateUtil"%>
+<%@page import="org.hibernate.SessionFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -78,19 +94,40 @@
                             <div class="form-group">
                                 <label for="sel1">Universitas:</label>
                                 <select class="form-control" name="univId" id="univ">
-                                    <option>UB</option>
-                                    <option>UMY</option>
-                                    <option>AMIKOM</option>
-                                    <option>UI</option>
+                                    <option selected value="">Pilih Universitas:</option>
+                                    <%
+                                        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+                                        UniversitasInterface ui = new UniversitasController(sessionFactory);
+                                        for (Object elem : ui.search("")) {
+                                            Universitas univ = (Universitas) elem;
+
+                                    %>
+
+                                    <option value="<%= univ.getId()%>"><%= univ.getNama()%> </option>
+
+
+                                    <%
+                                        }
+                                    %>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="sel1">Jurusan:</label>
                                 <select class="form-control" name="jurusanId" id="jur">
-                                    <option>IT</option>
-                                    <option>Kedokteran</option>
-                                    <option>Hukum</option>
-                                    <option>Ekonomi</option>
+                                    <option selected value="">Pilih Jurusan:</option>
+                                    <%
+                                        JurusanInterface ji = new JurusanController(sessionFactory);
+                                        for (Object elem : ji.search("")) {
+                                            Jurusan jur = (Jurusan) elem;
+
+                                    %>
+
+                                    <option value="<%= jur.getId()%>"><%= jur.getNama()%> </option>
+
+
+                                    <%
+                                        }
+                                    %>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -128,10 +165,20 @@
                         <div class="form-group">
                             <label for="sel1">Keahlian:</label>
                             <select class="form-control" id="skill">
-                                <option>C#</option>
-                                <option>Java</option>
-                                <option>PHP</option>
-                                <option>Microsoft Office</option>
+                                <option selected value="">Pilih Keahlian:</option>
+                                <%
+                                        ReqInterface ri = new ReqController(sessionFactory);
+                                        for (Object elem : ri.search("")) {
+                                            Requirements req = (Requirements) elem;
+
+                                    %>
+
+                                    <option value="<%= req.getId()%>"><%= req.getNama()%> </option>
+
+
+                                    <%
+                                        }
+                                    %>
                             </select>
                         </div>
                         <div class="form-group">
@@ -188,11 +235,20 @@
                         <div class="form-group">
                             <label for="sel1">Bahasa:</label>
                             <select class="form-control" id="bhs">
-                                <option>Indonesia</option>
-                                <option>Inggris</option>
-                                <option>Perancis</option>
-                                <option>Mandarin</option>
-                                <option>Jepang</option>
+                                <option selected value="">Pilih Bahasa:</option>
+                                <%
+                                        BahasaInterface bi = new BahasaController(sessionFactory);
+                                        for (Object elem : bi.search("")) {
+                                            Bahasa bhs = (Bahasa) elem;
+
+                                    %>
+
+                                    <option value="<%= bhs.getId()%>"><%= bhs.getNama()%> </option>
+
+
+                                    <%
+                                        }
+                                    %>
                             </select>
                         </div>
                     </div>

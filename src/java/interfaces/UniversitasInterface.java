@@ -12,6 +12,12 @@ import java.util.List;
  * @author Igaz
  */
 public interface UniversitasInterface {
+
     public List<Object> search(String keyword);
+
     public boolean insert(String nama, String akreditasi);
+
+    public Object getById(Object table, Object id);
+
+    public boolean delete(String id, String nama, String akreditasi);
 }

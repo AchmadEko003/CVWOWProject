@@ -68,6 +68,11 @@ public class Universitas implements Serializable {
         this.nama = nama;
         this.akreditasi = akreditasi;
     }
+
+    public Universitas(Integer id, String nama) {
+        this.id = id;
+        this.nama = nama;
+    }
     
 
     public Integer getId() {

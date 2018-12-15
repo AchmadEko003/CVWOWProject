@@ -49,5 +49,25 @@ public class JurusanController implements JurusanInterface{
         }
         return result;
     }
+
+    @Override
+    public boolean delete(String id, String nama) {
+        boolean hasil = false;
+        try {
+            int idB = Integer.parseInt(id);
+            Jurusan b = new Jurusan(idB, nama);
+            if (daoid.doDML(b, true)) {
+                hasil = true;
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return hasil;
+    }
+
+    @Override
+    public Object getById(Object table, Object id) {
+        return daoid.getById(table, id);
+    }
     
 }

@@ -7,6 +7,7 @@ package controllers;
 
 import daos.DAOInterface;
 import daos.GeneralDAO;
+import entities.Bahasa;
 import entities.Requirements;
 import interfaces.ReqInterface;
 import java.util.List;
@@ -48,6 +49,26 @@ public class ReqController implements ReqInterface{
             e.getMessage();
         }
         return result;
+    }
+
+    @Override
+    public Object getById(Object table, Object id) {
+        return daoid.getById(table, id);
+    }
+
+    @Override
+    public boolean delete(String id, String nama) {
+        boolean hasil = false;
+        try {
+            int idB = Integer.parseInt(id);
+            Requirements b = new Requirements(idB, nama);
+            if (daoid.doDML(b, true)) {
+                hasil = true;
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return hasil;
     }
     
 }
