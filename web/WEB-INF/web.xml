@@ -4,9 +4,49 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlet.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UniversitasServlet</servlet-name>
+        <servlet-class>servlet.UniversitasServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnivServlet</servlet-name>
+        <servlet-class>servlet.UnivServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddJurusan</servlet-name>
+        <servlet-class>servlet.AddJurusan</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddBahasa</servlet-name>
+        <servlet-class>servlet.AddBahasa</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddPendidikan</servlet-name>
+        <servlet-class>servlet.AddPendidikan</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/registerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UniversitasServlet</servlet-name>
+        <url-pattern>/universitasServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnivServlet</servlet-name>
+        <url-pattern>/univServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddJurusan</servlet-name>
+        <url-pattern>/AddJurusan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBahasa</servlet-name>
+        <url-pattern>/AddBahasa</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPendidikan</servlet-name>
+        <url-pattern>/addPendidikan</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

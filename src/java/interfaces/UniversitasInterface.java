@@ -5,18 +5,13 @@
  */
 package interfaces;
 
-import entities.Jurusan;
-import entities.Universitas;
-import entities.UserProfile;
 import java.util.List;
 
 /**
  *
  * @author Igaz
  */
-public interface PendidikanInterface {
-    
+public interface UniversitasInterface {
     public List<Object> search(String keyword);
-    public boolean insert(String instansi, String ipk, String jurusanId, String universitasId, String userProfileId);
-    
+    public boolean insert(String nama, String akreditasi);
 }

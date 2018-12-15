@@ -7,6 +7,9 @@ package controllers;
 
 import daos.DAOInterface;
 import daos.GeneralDAO;
+import entities.Jurusan;
+import entities.RiwayatPendidikan;
+import entities.Universitas;
 import entities.UserProfile;
 import interfaces.PendidikanInterface;
 import java.util.List;
@@ -35,18 +38,23 @@ public class PendidikanController implements PendidikanInterface{
     }
 
     @Override
-    public boolean insert(String id, String judul, String deskripsi, String requirements, String tanggal, String tanggalSelesai, String userId) {
-        boolean hasil = false;
-        Double ipkNew = Double.valueOf(ipk);
+    public boolean insert(String instansi, String ipk, String jurusanId, String universitasId, String userProfileId) {
+        boolean result = false;
         try {
-            RiwayatPendidikan use = new RiwayatPendidikan(Integer.valueOf(id), nama, jurusan, organisasi, new UserProfile(Integer.valueOf(userProfileId)));
-            if (daoid.doDML(use, false)) {
-                hasil = true;
+            int ipkNew = Integer.parseInt(ipk);
+            Jurusan j = new Jurusan(Integer.parseInt(jurusanId));
+            Universitas univ = new Universitas(Integer.parseInt(universitasId));
+            UserProfile up = new UserProfile(Integer.parseInt(userProfileId));
+            RiwayatPendidikan rp = new RiwayatPendidikan(instansi, ipkNew, j, univ, up);
+            if (daoid.doDML(rp, false)) {
+                result = true;
             }
         } catch (Exception e) {
             e.getMessage();
         }
-        return hasil;
+        return result;
     }
+
+    
     
 }

@@ -59,6 +59,11 @@ public class Bahasa implements Serializable {
         this.nama = nama;
     }
 
+    public Bahasa(String nama) {
+        this.nama = nama;
+    }
+
+    
     public Integer getId() {
         return id;
     }

@@ -50,6 +50,11 @@ public class Jurusan implements Serializable {
     public Jurusan() {
     }
 
+    public Jurusan(String nama) {
+        this.nama = nama;
+    }
+
+    
     public Jurusan(Integer id) {
         this.id = id;
     }
