@@ -117,6 +117,19 @@ public class UserProfile implements Serializable {
         this.ktp = ktp;
     }
 
+    public UserProfile(String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp, Bahasa bahasaId, User userId) {
+        this.nama = nama;
+        this.umur = umur;
+        this.alamat = alamat;
+        this.tanggalLahir = tanggalLahir;
+        this.noTelpon = noTelpon;
+        this.foto = foto;
+        this.cv = cv;
+        this.ktp = ktp;
+        this.bahasaId = bahasaId;
+        this.userId = userId;
+    }
+    
     public Integer getId() {
         return id;
     }

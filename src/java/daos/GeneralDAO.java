@@ -72,10 +72,10 @@ public class GeneralDAO implements DAOInterface {
         return this.fdao.getUser(user);
     }
 
-//    @Override
-//    public boolean getIdProfile(Object id) {
-//        return this.fdao.getProfilesId(id);
-//    }
+    @Override
+    public Object getIdProfile(Object id) {
+        return this.fdao.getProfileId(id);
+    }
 
     @Override
     public List<Object> doDatasId(Object table, String keyword) {

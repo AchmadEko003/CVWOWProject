@@ -20,5 +20,5 @@ public interface DAOInterface {
     public boolean insImg(int paramIndex,InputStream stream,long length);
     public boolean login(Object user, String password);
     public Integer getUser(Object user);
-//    public boolean getIdProfile(Object id);
+    public Object getIdProfile(Object id);
 }
