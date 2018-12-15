@@ -4,9 +4,25 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlet.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addProfileServlet</servlet-name>
+        <servlet-class>servlet.addProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getProfileServlet</servlet-name>
+        <servlet-class>servlet.getProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/registerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addProfileServlet</servlet-name>
+        <url-pattern>/addProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getProfileServlet</servlet-name>
+        <url-pattern>/getProfileServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

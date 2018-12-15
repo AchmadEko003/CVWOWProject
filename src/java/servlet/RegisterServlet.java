@@ -18,12 +18,15 @@ import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
 import tools.getLoginData;
 import tools.BCrypt;
+import tools.Mail;
 
 /**
  *
  * @author Nitani
  */
 public class RegisterServlet extends HttpServlet {
+
+    private Mail m = new Mail();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,9 +48,13 @@ public class RegisterServlet extends HttpServlet {
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
             getLoginData ld = new getLoginData(SessionFactory);
             UserInterface i = new UserController(SessionFactory);
+            m.Send(emails, usersName);
             out.print(i);
+            out.print(emails);
+            out.print(usersName);
+            out.print(password);
             i.register(usersName, emails, BCrypt.hashpw(password, BCrypt.gensalt()));
-            response.sendRedirect("/index.jsp");
+//            response.sendRedirect("/index.jsp");
         }
     }
 

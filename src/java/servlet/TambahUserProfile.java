@@ -5,31 +5,35 @@
  */
 package servlet;
 
-import controllers.UserController;
 import controllers.UserProfileController;
 import entities.User;
-import entities.UserProfile;
-import interfaces.UserInterface;
 import interfaces.UserProfileInterface;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Base64;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.hibernate.SessionFactory;
-import tools.BCrypt;
 import tools.HibernateUtil;
-import tools.getLoginData;
 
 /**
  *
  * @author Nitani
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/loginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "TambahUserProfile", urlPatterns = {"/tambahUserProfile"})
+public class TambahUserProfile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,26 +47,40 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String emails = request.getParameter("emailsa");
-        String password = request.getParameter("passwords");
+        String nama = request.getParameter("nama");
+        String umur = request.getParameter("umur");
+        String alamat = request.getParameter("alamat");
+        String tanggal = request.getParameter("tglLahir");
+        String noTelp = request.getParameter("telp");
+        String foto = request.getParameter("foto");
+        
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
-            UserInterface i = new UserController(SessionFactory);
-            UserProfileInterface ri = new UserProfileController(SessionFactory);
-//            session.invalidate();
+            UserProfileInterface i = new UserProfileController(SessionFactory);
 
-            if (i.login(emails, password)) {
-                int idUser = i.getUser(emails);
-                User r = (User) i.getById(idUser);
-                UserProfile up = (UserProfile) ri.getById(r.getId());
-                session.setAttribute("profile", up);
-                session.setAttribute("userData", r);
-                response.sendRedirect("Partials/header.jsp");
-            } else {
-                out.print("gagal");
-            }
-//            response.sendRedirect("newjsp.jsp");
+            File file = new File(foto);
+            BufferedImage bufferedImage = ImageIO.read(file);
+            String a = bufferedImage.toString();
+            String encodedUrl1 = Base64.getUrlEncoder().encodeToString(a.getBytes());
+
+            byte[] decodedBytes = Base64.getUrlDecoder().decode(encodedUrl1);
+            String decodedUrl = new String(decodedBytes);
+            out.print("4");
+            User u = (User) session.getAttribute("userData");
+//            out.print(u.getId());
+//            out.print(nama);
+//            out.print(umur);
+//            out.print(alamat);
+            out.print(tanggal);
+            out.println(encodedUrl1);
+            out.print(decodedUrl);
+//            if(i.inputData(nama, umur, alamat, tanggal, noTelp, "", "", "", String.valueOf(u.getId()), "2")){
+//            out.print("Berhasil");
+//            }
+//            out.print(i);
+//            i.register(usersName, emails, BCrypt.hashpw(password, BCrypt.gensalt()));
+//            response.sendRedirect("/index.jsp");
         }
     }
 

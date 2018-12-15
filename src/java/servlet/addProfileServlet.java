@@ -5,31 +5,27 @@
  */
 package servlet;
 
-import controllers.UserController;
 import controllers.UserProfileController;
-import entities.User;
-import entities.UserProfile;
-import interfaces.UserInterface;
 import interfaces.UserProfileInterface;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
-import tools.BCrypt;
 import tools.HibernateUtil;
-import tools.getLoginData;
 
 /**
  *
  * @author Nitani
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/loginServlet"})
-public class LoginServlet extends HttpServlet {
+public class addProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,29 +39,35 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String emails = request.getParameter("emailsa");
-        String password = request.getParameter("passwords");
+        String nama = request.getParameter("nama");
+        String umur = request.getParameter("umur");
+        String alamat = request.getParameter("alamat");
+        String tanggal = request.getParameter("tglLahir");
+        String noTelp = request.getParameter("telp");
+        String foto = request.getParameter("foto");
+        String cv = request.getParameter("cv");
+        String ktp = request.getParameter("ktp");
+        
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
-            UserInterface i = new UserController(SessionFactory);
-            UserProfileInterface ri = new UserProfileController(SessionFactory);
-//            session.invalidate();
-
-            if (i.login(emails, password)) {
-                int idUser = i.getUser(emails);
-                User r = (User) i.getById(idUser);
-                UserProfile up = (UserProfile) ri.getById(r.getId());
-                session.setAttribute("profile", up);
-                session.setAttribute("userData", r);
-                response.sendRedirect("Partials/header.jsp");
-            } else {
-                out.print("gagal");
-            }
-//            response.sendRedirect("newjsp.jsp");
+            UserProfileInterface i = new UserProfileController(SessionFactory);
+            out.println(foto);
+            out.print(upload(foto));
+//            if (i.inputData(nama, umur, alamat, tanggal, noTelp, upload(foto), upload(cv), upload(ktp), "1", "1")) {
+//                out.print("Berhasil");
+//            }
         }
     }
 
+    protected String upload(String files) throws IOException {
+        String hasil = "";
+        File filee = new File(files);
+        BufferedImage bufferedImage = ImageIO.read(filee);
+        String a = bufferedImage.toString();
+        hasil = Base64.getUrlEncoder().encodeToString(a.getBytes());
+        return hasil;
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -104,5 +106,4 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

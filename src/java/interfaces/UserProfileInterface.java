@@ -11,10 +11,8 @@ import java.util.List;
  *
  * @author Nitani
  */
-public interface UserInterface {
+public interface UserProfileInterface {
     public List<Object> search(String keyword);
-    public boolean register(String nama, String email, String password);
-    public boolean login(Object nama, String password);
+    public boolean inputData(String nama, String umur, String alamat, String tanggalLahir, String noTelpon, String foto, String cv, String ktp, String bahasaId, String userId);
     public Object getById(Object id);
-    public Integer getUser(Object user);
 }

@@ -1,9 +1,10 @@
 <%-- 
-    Document   : index
-    Created on : Dec 12, 2018, 9:48:49 PM
+    Document   : lokerViews
+    Created on : Dec 13, 2018, 8:49:40 PM
     Author     : Nitani
 --%>
 
+<%@page import="entities.UserProfile"%>
 <%@page import="entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,14 +19,10 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     </head>
-    <body class="bg-light">
-        <% String idUser = "", emails = "", role = "", decodedUrl = "";
-            if (session.getAttribute("userData") != null) {
-                User r = (User) session.getAttribute("userData");
-                idUser = r.getId().toString();
-                emails = r.getEmail();
-                role = r.getRoleId().getStatus().toLowerCase();
-                out.print(emails);
+    <body>
+        <% String namasda = "", umursdwa = "", dwasdaw = "", dwwasdaw = "";
+            if (session.getAttribute("profile") != null) {
+                UserProfile r = (UserProfile) session.getAttribute("profile");
             }
         %>
         <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
@@ -61,32 +58,26 @@
                 </ul>
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <% // if(session.getAttribute("userData") == null) { %>
                         <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModalCenter">
                             Login
                         </button>
-                        <% // } else { %>
-                        <a class="btn btn-outline-light" href="loginServlet" role="button">Logout</a>
-                        <% // } %>
                     </li>
                 </ul>
             </div>
         </nav>
 
-        <!-- Modal -->
         <div class="modal fade bd-example-modal-lg" id="cvModal" tabindex="-1" role="dialog" aria-labelledby="cvModal" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
 
                     <div class="modal-body">
-                        <%--<%@include file="Partials/cvView.jsp" %>--%>
+                        <%--<%@include file="cvView.jsp" %>--%>
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -108,7 +99,7 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div id="login" class="container tab-pane active"><br>
-                                    <form method="POST"  action="loginServlet">
+                                    <form method="POST"  action="../loginServlet">
                                         <div class="form-group">
                                             <i class="fas fa-envelope"></i>
                                             <label for="exampleInputEmail1">Email address</label>
@@ -158,19 +149,6 @@
                 </div>
             </div>
         </div>
-
-        <% if (role.equals("user")) { %>
-        <%@include file="Partials/cvView.jsp" %>
-        <% // } else if (role.equals("admin")) { %>
-        <% } else if (role.equals("admin")) {
-        %>
-        <%@include file="Partials/userProfileViews.jsp" %>
-        <% }%>
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-bottom">
-            <div class="text-center">
-                <p>&copy; 2018 Mitra Integrasi Informatika. All rights reserved.</p>
-            </div>
-        </nav>
+        <%@include file="cvView.jsp" %>
     </body>
 </html>

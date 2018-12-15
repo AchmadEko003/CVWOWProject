@@ -17,6 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import entities.User;
+import entities.UserProfile;
 import tools.BCrypt;
 
 /**
@@ -121,6 +122,7 @@ public class FunctionDAO {
         String className = table.getClass().getName();
         className = className.substring(className.indexOf(".") + 1);
         String query = "FROM " + className + " where Id =" + id;
+        System.out.println(query);
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
@@ -191,25 +193,25 @@ public class FunctionDAO {
         return false;
     } 
     
-//    public UserProfile getProfileId(Object user) {
-//        UserProfile object = null;
-//        String query = "from UserProfile where Users_Id= " + user  ;
-//        System.out.println(query);
-//        try {
-//            session = factory.openSession();
-//            transaction = session.beginTransaction();
-//            object = (UserProfile) session.createQuery(query).uniqueResult();
-//            transaction.commit();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            if (transaction != null) {
-//                transaction.rollback();
-//            }
-//        } finally {
-//            session.close();
-//        }
-//        return object;
-//    }
+    public UserProfile getProfileId(Object user) {
+        UserProfile object = null;
+        String query = "from UserProfile where USER_ID= " + user  ;
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            object = (UserProfile) session.createQuery(query).uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return object;
+    }
 //    
 //    public boolean getProfilesId(Object user){
 //        boolean hasil = false;

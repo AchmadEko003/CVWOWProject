@@ -94,11 +94,9 @@ public class getLoginData {
         return a;
     }
 
-    public List<Object> getUserProfileId(String key) {
+    public Object getUserProfileId(String key) {
         List<Object> rs = new ArrayList<>();
-        String className = new Keahlian().getClass().getSimpleName();
-        className = className.substring(className.indexOf(".") + 1);
-        String query = "From " + className + " where USER_PROFILE_ID= " + key;
+        String query = "From UserProfile where USER_ID= " + key;
         System.out.println(query);
         try {
             session = factory.openSession();

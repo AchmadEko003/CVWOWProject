@@ -4,6 +4,12 @@
     Author     : Nitani
 --%>
 
+<%@page import="controllers.UserProfileController"%>
+<%@page import="interfaces.UserProfileInterface"%>
+<%@page import="tools.HibernateUtil"%>
+<%@page import="org.hibernate.SessionFactory"%>
+<%@page import="java.util.Base64"%>
+<%@page import="entities.UserProfile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,17 +18,31 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <% String namas = "", umurs = "", alamats = "", tglLahirs = "", telps = "";
+            if (session.getAttribute("profile") != null) {
+                UserProfile r = (UserProfile) session.getAttribute("profile");
+                namas = r.getNama();
+                umurs = String.valueOf(r.getUmur());
+                alamats = r.getAlamat();
+                tglLahirs = r.getTanggalLahir().toString();
+                telps = String.valueOf(r.getNoTelpon());
+            }
+        %>
+        <%--<%@include file="header.jsp" %>--%>
         <div class="container">
             <div class="row">
                 <!--Profile singkat sisi kiri-->
                 <div class="col-sm-4">
-                    <div class="card shadow p-3 mb-3 bg-white rounded">
-                        <div class="text-center mt-4">
-                        <img src="./Assets/Foto 3x4 Eko.jpg" class="rounded-circle" alt="Card image cap" width="232" height="236">
-                        </div>
+                    <div class="card shadow p-3 mb-3 bg-white rounded mt-3" style="width: 22rem;">
+                        <img src="../Assets/Foto 3x4 Eko.jpg" class="card-img-top" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Nama</h5>
-                            <p class="card-text">Profil singkat</p>
+                            <h3 class="card-title"><%= namas%></h3>
+                            <ul class="list-group">
+                                <li>Umur : <%= umurs %></li>
+                                <li>Tanggal Lahir : <%= tglLahirs %></li>
+                                <li>Telepon : <%= telps %></li>
+                                <li>Alamat : <%= alamats %></li>
+                            </ul>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
@@ -35,7 +55,7 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link" data-toggle="modal" data-target="#cvModal">Card link</a>
                             <a href="#" class="card-link">Another link</a>
                         </div>
                     </div>
