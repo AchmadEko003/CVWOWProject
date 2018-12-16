@@ -5,14 +5,12 @@
  */
 package servlet;
 
-import controllers.PendidikanController;
-import controllers.UniversitasController;
-import entities.UserProfile;
-import interfaces.PendidikanInterface;
-import interfaces.UniversitasInterface;
+import controllers.SertifikatController;
+import interfaces.SertifikatInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +23,8 @@ import tools.getLoginData;
  *
  * @author Igaz
  */
-public class AddPendidikan extends HttpServlet {
+@WebServlet(name = "AddSertifikat", urlPatterns = {"/addSertifikat"})
+public class AddSertifikat extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,13 +42,10 @@ public class AddPendidikan extends HttpServlet {
         getLoginData data = new getLoginData(factory);
         getDataLogin dataLogin = new getDataLogin();
         try (PrintWriter out = response.getWriter()) {
-            String instansi = request.getParameter("instansi");
-            String ipk = request.getParameter("ipk");
-            String universitas = request.getParameter("univId");
-            String jurusan = request.getParameter("jurusanId");
-            UserProfile up = new UserProfile();
-            PendidikanInterface pi = new PendidikanController(factory);
-            pi.insert(instansi, ipk, jurusan, universitas, String.valueOf(dataLogin.getUserProfileId()));
+            String nama = request.getParameter("nama");
+            String lembaga = request.getParameter("lembaga");
+            SertifikatInterface si = new SertifikatController(factory);
+            si.insert(nama, lembaga, String.valueOf(dataLogin.getUserProfileId()));
             response.sendRedirect("view/dropdownCv.jsp");
         }
     }

@@ -54,6 +54,9 @@ public class Bahasa implements Serializable {
         this.id = id;
     }
 
+    
+    
+
     public Bahasa(Integer id, String nama) {
         this.id = id;
         this.nama = nama;

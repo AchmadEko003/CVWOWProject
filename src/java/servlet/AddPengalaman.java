@@ -5,14 +5,12 @@
  */
 package servlet;
 
-import controllers.PendidikanController;
-import controllers.UniversitasController;
-import entities.UserProfile;
-import interfaces.PendidikanInterface;
-import interfaces.UniversitasInterface;
+import controllers.PengalamanController;
+import interfaces.PengalamanInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +23,8 @@ import tools.getLoginData;
  *
  * @author Igaz
  */
-public class AddPendidikan extends HttpServlet {
+@WebServlet(name = "AddPengalaman", urlPatterns = {"/addPengalaman"})
+public class AddPengalaman extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,15 +42,16 @@ public class AddPendidikan extends HttpServlet {
         getLoginData data = new getLoginData(factory);
         getDataLogin dataLogin = new getDataLogin();
         try (PrintWriter out = response.getWriter()) {
-            String instansi = request.getParameter("instansi");
-            String ipk = request.getParameter("ipk");
-            String universitas = request.getParameter("univId");
-            String jurusan = request.getParameter("jurusanId");
-            UserProfile up = new UserProfile();
-            PendidikanInterface pi = new PendidikanController(factory);
-            pi.insert(instansi, ipk, jurusan, universitas, String.valueOf(dataLogin.getUserProfileId()));
+            String posisi = request.getParameter("posisi");
+            String perusahaan = request.getParameter("perusahaan");
+            String deskripsi = request.getParameter("deskripsiPengalaman");
+            String tglMulai = request.getParameter("tglMulai");
+            String tglSelesai = request.getParameter("tglSelesai");
+            PengalamanInterface pi = new PengalamanController(factory);
+            pi.insert(deskripsi, perusahaan, posisi, tglMulai, tglSelesai, String.valueOf(dataLogin.getUserProfileId()));
             response.sendRedirect("view/dropdownCv.jsp");
         }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

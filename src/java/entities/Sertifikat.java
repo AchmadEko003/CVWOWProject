@@ -63,6 +63,19 @@ public class Sertifikat implements Serializable {
         this.lembaga = lembaga;
     }
 
+    public Sertifikat(Integer id, String nama) {
+        this.id = id;
+        this.nama = nama;
+    }
+
+    public Sertifikat(String nama, String lembaga, UserProfile userProfileId) {
+        this.nama = nama;
+        this.lembaga = lembaga;
+        this.userProfileId = userProfileId;
+    }
+
+    
+    
     public Integer getId() {
         return id;
     }

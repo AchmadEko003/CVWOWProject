@@ -47,7 +47,7 @@ public class PendidikanController implements PendidikanInterface{
             Jurusan j = new Jurusan(Integer.parseInt(jurusanId));
             Universitas univ = new Universitas(Integer.parseInt(universitasId));
             UserProfile up = new UserProfile(Integer.parseInt(userProfileId));
-            RiwayatPendidikan rp = new RiwayatPendidikan(instansi, ipkNew, j, univ, new UserProfile(1));
+            RiwayatPendidikan rp = new RiwayatPendidikan(instansi, ipkNew, j, univ, up);
             if (daoid.doDML(rp, false)) {
                 result = true;
             }

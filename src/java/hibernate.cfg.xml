@@ -56,7 +56,6 @@ Contributor(s):
     <mapping class="entities.Keahlian"/>
     <mapping class="entities.LowonganPekerjaan"/>
     <mapping class="entities.Pencapaian"/>
-    <mapping class="entities.Pengalaman"/>
     <mapping class="entities.Project"/>
     <mapping class="entities.Requirements"/>
     <mapping class="entities.RiwayatPendidikan"/>
@@ -65,5 +64,6 @@ Contributor(s):
     <mapping class="entities.Universitas"/>
     <mapping class="entities.User"/>
     <mapping class="entities.UserProfile"/>
+    <mapping class="entities.Pengalaman"/>
   </session-factory>
 </hibernate-configuration>

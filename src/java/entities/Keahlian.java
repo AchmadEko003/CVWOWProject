@@ -58,6 +58,16 @@ public class Keahlian implements Serializable {
         this.id = id;
     }
 
+    public Keahlian(String nama, String deskripsi, UserProfile userProfileId) {
+        this.nama = nama;
+        this.deskripsi = deskripsi;
+        this.userProfileId = userProfileId;
+    }
+
+    
+
+    
+    
     public Keahlian(Integer id, String nama, String deskripsi) {
         this.id = id;
         this.nama = nama;

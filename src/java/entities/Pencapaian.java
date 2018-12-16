@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Nitani
+ * @author Igaz
  */
 @Entity
 @Table(name = "pencapaian")
@@ -42,7 +42,7 @@ public class Pencapaian implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @Column(name = "NAMA")
-    private int nama;
+    private String nama;
     @Basic(optional = false)
     @Lob
     @Column(name = "DESKRIPSI")
@@ -58,12 +58,25 @@ public class Pencapaian implements Serializable {
         this.id = id;
     }
 
-    public Pencapaian(Integer id, int nama, String deskripsi) {
+    public Pencapaian(Integer id, String nama, String deskripsi) {
         this.id = id;
         this.nama = nama;
         this.deskripsi = deskripsi;
     }
 
+    public Pencapaian(Integer id, String nama) {
+        this.id = id;
+        this.nama = nama;
+    }
+
+    public Pencapaian(String nama, String deskripsi, UserProfile userProfileId) {
+        this.nama = nama;
+        this.deskripsi = deskripsi;
+        this.userProfileId = userProfileId;
+    }
+
+    
+    
     public Integer getId() {
         return id;
     }
@@ -72,11 +85,11 @@ public class Pencapaian implements Serializable {
         this.id = id;
     }
 
-    public int getNama() {
+    public String getNama() {
         return nama;
     }
 
-    public void setNama(int nama) {
+    public void setNama(String nama) {
         this.nama = nama;
     }
 

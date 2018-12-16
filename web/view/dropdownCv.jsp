@@ -34,44 +34,20 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <!-- Brand -->
-            <a class="navbar-brand" href="#">Logo</a>
-
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profil</a>
-                </li>
-
-                <!-- Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        <div class="float-sm-right">
+            <div class="container form-group" >
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                         Isi CV
-                    </a>
+                    </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Pendidikan</a>
-                        <a class="dropdown-item" href="#">Link 2</a>
-                        <a class="dropdown-item" href="#">Link 3</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#pendidikanModal">Pendidikan</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#keahlianModal">Keahlian</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#pencapaianModal">Pencapaian</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#bahasaModal">Bahasa</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#pengalamanModal">Pengalaman Kerja</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#sertifikatModal">Sertifikat</a>
                     </div>
-                </li>
-            </ul>
-        </nav>
-        <br>
-        <div class="container form-group" >
-            <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    Isi CV
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" data-toggle="modal" data-target="#pendidikanModal">Pendidikan</a>
-                    <a class="dropdown-item" data-toggle="modal" data-target="#keahlianModal">Keahlian</a>
-                    <a class="dropdown-item" data-toggle="modal" data-target="#pencapaianModal">Pencapaian</a>
-                    <a class="dropdown-item" data-toggle="modal" data-target="#bahasaModal">Bahasa</a>
-                    <a class="dropdown-item" data-toggle="modal" data-target="#pengalamanModal">Pengalaman Kerja</a>
                 </div>
             </div>
         </div>
@@ -162,11 +138,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="sel1">Keahlian:</label>
-                            <select class="form-control" id="skill">
-                                <option selected value="">Pilih Keahlian:</option>
-                                <%
+                        <form action="../addKeahlian" method="POST">
+                            <div class="form-group">
+                                <label for="sel1">Keahlian:</label>
+                                <select class="form-control" id="skill" name="nama">
+                                    <option selected value="">Pilih Keahlian:</option>
+                                    <%
                                         ReqInterface ri = new ReqController(sessionFactory);
                                         for (Object elem : ri.search("")) {
                                             Requirements req = (Requirements) elem;
@@ -179,16 +156,20 @@
                                     <%
                                         }
                                     %>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="comment">Deskripsi:</label>
-                            <textarea class="form-control" rows="5" id="desk"></textarea>
-                        </div>
+                                </select>
+                            </div>
+                            <div class="form-group" name="deskripsi">
+                                <label for="comment">Deskripsi:</label>
+                                <textarea class="form-control" rows="5" id="desk"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -205,18 +186,23 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="pwd">Pencapaian:</label>
-                            <input type="text" class="form-control" id="pencapaian">
-                        </div>
-                        <div class="form-group">
-                            <label for="comment">Deskripsi:</label>
-                            <textarea class="form-control" rows="5" id="desk"></textarea>
-                        </div>
+                        <form action="?" method="POST">
+
+                            <div class="form-group">
+                                <label for="pwd">Pencapaian:</label>
+                                <input type="text" class="form-control" id="pencapaian" name="pencapaian">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Deskripsi:</label>
+                                <textarea class="form-control" rows="5" id="desk" name="deskripsiPencapaian"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -232,11 +218,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="sel1">Bahasa:</label>
-                            <select class="form-control" id="bhs">
-                                <option selected value="">Pilih Bahasa:</option>
-                                <%
+                        <form action="?" method="POST">
+                            <div class="form-group">
+                                <label for="sel1">Bahasa:</label>
+                                <select class="form-control" id="bhs" name="bahasaUserProfile">
+                                    <option selected value="">Pilih Bahasa:</option>
+                                    <%
                                         BahasaInterface bi = new BahasaController(sessionFactory);
                                         for (Object elem : bi.search("")) {
                                             Bahasa bhs = (Bahasa) elem;
@@ -249,8 +236,9 @@
                                     <%
                                         }
                                     %>
-                            </select>
-                        </div>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -270,30 +258,66 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="pwd">Posisi:</label>
-                            <input type="text" class="form-control" id="pos">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Perusahaan:</label>
-                            <input type="text" class="form-control" id="prshn">
-                        </div>
-                        <div class="form-group">
-                            <label for="comment">Deskripsi:</label>
-                            <textarea class="form-control" rows="5" id="desk"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Tanggal Mulai Bekerja</label>
-                            <input type="date" class="form-control" id="tglstrt">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Tanggal selesai Bekerja</label>
-                            <input type="date" class="form-control" id="tglsls">
-                        </div>
+                        <form action="../addPengalaman" method="POST">
+                            <div class="form-group">
+                                <label for="pwd">Posisi:</label>
+                                <input type="text" class="form-control" id="pos" name="posisi">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Perusahaan:</label>
+                                <input type="text" class="form-control" id="prshn" name="perusahaan">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Deskripsi:</label>
+                                <textarea class="form-control" rows="5" id="desk" name="deskripsiPengalaman"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Tanggal Mulai Bekerja</label>
+                                <input type="date" class="form-control" id="tglstrt" name="tglMulai">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Tanggal selesai Bekerja</label>
+                                <input type="date" class="form-control" id="tglsls" name="tglSelesei">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--modal serti-->
+        <div class="modal fade" id="sertifikatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Sertifikat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="../addSertifikat" method="POST">
+                            <div class="form-group">
+                                <label for="pwd">Nama:</label>
+                                <input type="text" class="form-control" id="pos" name="namaSerti">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Lembaga</label>
+                                <input type="text" class="form-control" id="prshn" nama="lembaga">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                     </div>
                 </div>
             </div>
