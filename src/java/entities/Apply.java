@@ -56,6 +56,12 @@ public class Apply implements Serializable {
         this.id = id;
     }
 
+    public Apply(String status, LowonganPekerjaan lowonganId, User userId) {
+        this.status = status;
+        this.lowonganId = lowonganId;
+        this.userId = userId;
+    }
+
     public Apply(Integer id, String status) {
         this.id = id;
         this.status = status;

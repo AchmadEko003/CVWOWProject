@@ -30,7 +30,7 @@
                             <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
                         </a>-->
             <button type="button" class="btn btn-light">
-                <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
+                <img src="../Assets/MII-logo.png" alt="Logo" style="width:40px;">
             </button>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -71,7 +71,7 @@
                 <div class="modal-content">
 
                     <div class="modal-body">
-                        <%--<%@include file="cvView.jsp" %>--%>
+                        <%@include file="cvView.jsp" %>
                     </div>
 
                 </div>

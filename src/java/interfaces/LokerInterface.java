@@ -12,6 +12,10 @@ import java.util.List;
  * @author Nitani
  */
 public interface LokerInterface {
+
     public List<Object> search(String keyword);
+
     public boolean insert(String judul, String deskripsi, String tanggalSelesai, String requirementsId, String userId);
+
+    public Object getByIds(Object id);
 }

@@ -12,7 +12,10 @@ import java.util.List;
  * @author Nitani
  */
 public interface UserProfileInterface {
+
     public List<Object> search(String keyword);
+
     public boolean inputData(String nama, String umur, String alamat, String tanggalLahir, String noTelpon, String foto, String cv, String ktp, String bahasaId, String userId);
+
     public Object getById(Object id);
 }

@@ -81,4 +81,19 @@ public class GeneralDAO implements DAOInterface {
     public List<Object> doDatasId(Object table, String keyword) {
         return this.fdao.getDatasId(table, keyword);
     }
+
+    @Override
+    public Object getAttributPendidikan(Object table, Object id) {
+        return this.fdao.getAttributPendidikan(table, id);
+    }
+
+    @Override
+    public Object getAttributReq(Object id) {
+        return this.fdao.getAttributReq(id);
+    }
+
+    @Override
+    public Object getLoker(Object id) {
+        return this.fdao.getLoker(id);
+    }
 }

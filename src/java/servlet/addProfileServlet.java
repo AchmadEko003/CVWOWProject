@@ -54,9 +54,9 @@ public class addProfileServlet extends HttpServlet {
             UserProfileInterface i = new UserProfileController(SessionFactory);
             out.println(foto);
             out.print(upload(foto));
-//            if (i.inputData(nama, umur, alamat, tanggal, noTelp, upload(foto), upload(cv), upload(ktp), "1", "1")) {
-//                out.print("Berhasil");
-//            }
+            if (i.inputData(nama, umur, alamat, tanggal, noTelp, upload(foto), upload(cv), upload(ktp), "1", "1")) {
+                response.sendRedirect("index.jsp");
+            }
         }
     }
 

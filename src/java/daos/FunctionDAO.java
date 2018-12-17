@@ -5,6 +5,10 @@
  */
 package daos;
 
+import entities.Jurusan;
+import entities.LowonganPekerjaan;
+import entities.Requirements;
+import entities.Universitas;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -157,7 +161,7 @@ public class FunctionDAO {
 
     public User login(Object user) {
         User object = null;
-        String query = "from User where email= '" + user + "'" ;
+        String query = "from User where email= '" + user + "'";
         System.out.println(query);
         try {
             session = factory.openSession();
@@ -175,27 +179,27 @@ public class FunctionDAO {
         return object;
     }
 //    
-    
-    public Integer getUser(Object user){
+
+    public Integer getUser(Object user) {
         Integer a;
         User e = this.login(user);
         a = e.getId();
         return a;
     }
-    
-    public boolean validationLogin(Object user, String password){
+
+    public boolean validationLogin(Object user, String password) {
         User e = this.login(user);
-        if(e != null){
-            if(BCrypt.checkpw(password, e.getPassword())){
+        if (e != null) {
+            if (BCrypt.checkpw(password, e.getPassword())) {
                 return true;
             }
         }
         return false;
-    } 
-    
+    }
+
     public UserProfile getProfileId(Object user) {
         UserProfile object = null;
-        String query = "from UserProfile where USER_ID= " + user  ;
+        String query = "from UserProfile where USER_ID= " + user;
         System.out.println(query);
         try {
             session = factory.openSession();
@@ -221,11 +225,12 @@ public class FunctionDAO {
 //        }
 //        return hasil;
 //    }
-    
+
     public List<Object> getDatasId(Object entities, String key) {
         List<Object> rs = new ArrayList<>();
         String className = entities.getClass().getSimpleName();
         className = className.substring(className.indexOf(".") + 1);
+        System.out.println(className);
         String query = "From " + className + " where USER_PROFILE_ID=" + key;
         System.out.println(query);
         try {
@@ -242,5 +247,76 @@ public class FunctionDAO {
             session.close();
         }
         return rs;
+    }
+
+    public Object getAttributPendidikan(Object table, Object user) {
+        Object object = null;
+        String query = "";
+        if (table == "univ") {
+            query = "from Universitas where NAMA= '" + user + "'";
+        } else {
+            query = "from Jurusan where NAMA= '" + user + "'";
+        }
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            if (table == "univ") {
+                object = (Universitas) session.createQuery(query).uniqueResult();
+            } else {
+                object = (Jurusan) session.createQuery(query).uniqueResult();
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return object;
+    }
+
+    public Object getAttributReq(Object user) {
+        Object object = null;
+        String query = "from Requirements where NAMA= '" + user + "'";
+
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            object = (Requirements) session.createQuery(query).uniqueResult();
+
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return object;
+    }
+    
+    public LowonganPekerjaan getLoker(Object user) {
+        LowonganPekerjaan object = null;
+        String query = "from LowonganPekerjaan where ID= " + user;
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            object = (LowonganPekerjaan) session.createQuery(query).uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return object;
     }
 }
