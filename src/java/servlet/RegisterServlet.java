@@ -54,7 +54,7 @@ public class RegisterServlet extends HttpServlet {
             out.print(usersName);
             out.print(password);
             i.register(usersName, emails, BCrypt.hashpw(password, BCrypt.gensalt()));
-//            response.sendRedirect("/index.jsp");
+            response.sendRedirect("home.jsp");
         }
     }
 

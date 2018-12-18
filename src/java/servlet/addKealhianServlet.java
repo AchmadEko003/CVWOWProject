@@ -7,6 +7,7 @@ package servlet;
 
 import controllers.KeahlianController;
 import entities.User;
+import entities.UserProfile;
 import interfaces.KeahlianInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,7 +45,7 @@ public class addKealhianServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
             KeahlianInterface i = new KeahlianController(SessionFactory);
-            User r = (User) session.getAttribute("userData");
+            UserProfile r = (UserProfile) session.getAttribute("profile");
             if (i.insert(nama, deskripsi, r.getId().toString())); {
                 response.sendRedirect("index.jsp");
             }

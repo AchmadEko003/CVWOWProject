@@ -18,6 +18,6 @@ public interface PendidikanInterface {
     
     public List<Object> search(String keyword);
     public List<Object> getAll(String keyword);
-    public boolean insert(String instansi, String ipk, String jurusanId, String universitasId, String userProfileId);
+    public boolean insert(String ipk, String jurusanId, String universitasId, String userProfileId);
     
 }

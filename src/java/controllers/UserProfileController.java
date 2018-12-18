@@ -43,7 +43,7 @@ public class UserProfileController implements UserProfileInterface {
     }
 
     @Override
-    public boolean inputData(String nama, String umur, String alamat, String tanggalLahir, String noTelpon, String foto, String cv, String ktp, String bahasaId, String userId) {
+    public boolean inputData(String nama, String umur, String alamat, String tanggalLahir, String noTelpon, String foto, String cv, String ktp, String userId) {
         boolean hasil = false;
         try {
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -51,7 +51,7 @@ public class UserProfileController implements UserProfileInterface {
             byte[] a = foto.getBytes();
             byte[] b = cv.getBytes();
             byte[] c = ktp.getBytes();
-            UserProfile use = new UserProfile(nama, Integer.valueOf(umur), alamat, dates, Integer.valueOf(noTelpon), a, b, c, new Bahasa(Integer.valueOf(bahasaId)), new User(Integer.valueOf(userId)));
+            UserProfile use = new UserProfile(nama, Integer.valueOf(umur), alamat, dates, Integer.valueOf(noTelpon), a, b, c, new User(Integer.valueOf(userId)));
             if (daoid.doDML(use, false)) {
                 hasil = true;
             }

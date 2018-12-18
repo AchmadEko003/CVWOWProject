@@ -4,6 +4,9 @@
     Author     : Nitani
 --%>
 
+<%@page import="entities.Project"%>
+<%@page import="controllers.ProjectController"%>
+<%@page import="interfaces.ProjectInterface"%>
 <%@page import="entities.RiwayatPendidikan"%>
 <%@page import="controllers.PendidikanController"%>
 <%@page import="interfaces.PendidikanInterface"%>
@@ -28,13 +31,45 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-    </head>
-    <body>
-        <% String namas = "", umurs = "", alamats = "", tglLahirs = "", telps = "";
-            SessionFactory factorys = HibernateUtil.getSessionFactory();
+        <!--Import to PDF-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.1.135/jspdf.min.js"></script>
+        <script type="text/javascript" src="http://cdn.uriit.ru/jsPDF/libs/adler32cs.js/adler32cs.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+        <script type="text/javascript" src="libs/Blob.js/BlobBuilder.js"></script>
+        <script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.addimage.js"></script>
+        <script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.standard_fonts_metrics.js"></script>
+        <script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.split_text_to_size.js"></script>
+        <script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.from_html.js"></script>
+        <script type="text/javascript" src="js/basic.js"></script>
+        <script>
+            $(function () {
 
+                var specialElementHandlers = {
+                    '#editor': function (element, renderer) {
+                        return true;
+                    }
+                };
+                $('#cmd').click(function () {
+                    var doc = new jsPDF();
+                    doc.fromHTML(
+                            $('#target').html(), 15, 15,
+                            {'width': 170, 'elementHandlers': specialElementHandlers},
+                            function () {
+                                doc.save('sample-file.pdf');
+                            }
+                    );
+
+                });
+            });
+        </script>
+    </head>
+    <body  id="target">
+        <% String namas = "", umurs = "", alamats = "", tglLahirs = "", telps = "";
+            UserProfile r = (UserProfile) session.getAttribute("profile");
+            SessionFactory factorys = HibernateUtil.getSessionFactory();
             if (session.getAttribute("profile") != null) {
-                UserProfile r = (UserProfile) session.getAttribute("profile");
                 namas = r.getNama();
                 umurs = String.valueOf(r.getUmur());
                 alamats = r.getAlamat();
@@ -42,22 +77,28 @@
                 telps = String.valueOf(r.getNoTelpon());
             }
         %>
-        
         <div class="container">
             <div class="row">
-
                 <!--Profile singkat sisi kiri-->
                 <div class="col-sm-4">
                     <div class="card shadow p-3 mb-3 bg-white rounded mt-3" style="width: 22rem;">
-                        <img src="../../Assets/Foto 3x4 Eko.jpg" class="card-img-top" alt="Card image cap">
+                        <img src="Assets/MII-logo.png" class="card-img-top">
                         <div class="card-body">
-                            <h3 class="card-title"><%= namas%></h3>
-                            <ul class="list-group">
-                                <li>Umur : <%= umurs%></li>
-                                <li>Tanggal Lahir : <%= tglLahirs%></li>
-                                <li>Telepon : <%= telps%></li>
-                                <li>Alamat : <%= alamats%></li>
-                            </ul>
+                            <h4 class="card-title">Hi , saya <%= namas%></h4>
+                            <footer class="blockquote-footer"><a href="#" data-toggle="modal" data-target="#userModal">Edit profile</a></footer>
+                            <p class="mb-1"><%= umurs%></p>
+                            <p class="mb-1"><%= tglLahirs%></p>
+                            <p class="mb-1"><%= telps%></p>
+                            <p><%= alamats%></p>
+                        </div>
+                        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <%@include file="../User/userProfileViews.jsp" %>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
@@ -65,19 +106,20 @@
                                 <p>Ini isinya</p>
                             </li>
                             <li class="list-group-item">
-                                <h5><i class="fas fa-certificate"></i> Sertifikat</h5><br>
-                                <% UserProfile r = (UserProfile) session.getAttribute("profile");
-                                    SertifikatInterface si = new SertifikatController(factorys);
-                                    for (Object loker : si.search(r.getId().toString())) {
-                                        Sertifikat sert = (Sertifikat) loker;%>
-                                <p> <%= sert.getNama()%> </p>
-                                <% }%>
+                                <h5><i class="fas fa-award"></i> Sertifikat</h5><br>
+                                <% SertifikatInterface sis = new SertifikatController(factorys);
+                                    for (Object serti : sis.search(r.getId().toString())) {
+                                        Sertifikat sert = (Sertifikat) serti; %>
+                                <p class="mb-1"> <%= sert.getNama()%> </p>
+                                <footer class="blockquote-footer"><%= sert.getLembaga()%></footer>
+                                    <% } %>
                             </li>
                         </ul>
                     </div>
                     <hr class="d-sm-none">
                     <br>
                 </div>
+
                 <div class="col-sm-8">
                     <div class="card shadow p-3 mb-3 bg-white rounded" style="margin-top: 10px;">
                         <div class="card-header">
@@ -87,8 +129,8 @@
                             <% PendidikanInterface pni = new PendidikanController(factorys);
                                 for (Object pendi : pni.search(r.getId().toString())) {
                                     RiwayatPendidikan pe = (RiwayatPendidikan) pendi;%>
-                            <h5> <%= pe.getUniversitasId().getNama()%> - <%= pe.getJurusanId().getNama()%> </h5>
-                            <p> Instansi : <%= pe.getInstansi()%>    IPK : <%= pe.getIpk()%> </p>
+                            <h5> <%= pe.getUniversitasId().getNama()%></h5>
+                            <p class="blockquote-footer"> <%= pe.getJurusanId().getNama()%> | <%= pe.getIpk()%></p>
                             <% } %>
                         </div>
                     </div>
@@ -100,14 +142,10 @@
                             <% PengalamanInterface pi = new PengalamanController(factorys);
                                 for (Object pengalaman : pi.search(r.getId().toString())) {
                                     Pengalaman peng = (Pengalaman) pengalaman;%>
-                            <ul>
-                                <li> Perusahaan : <%= peng.getPerusahaan()%> </li>
-                                <li> Deskripsi : <%= peng.getDeskripsi()%> </li>
-                                <li> Posisi : <%= peng.getPosisi()%> </li>
-                                <li> Mulai Bekerja : <%= peng.getMulaiBekerja()%> </li>
-                                <li> Selesai Bekerja : <%= peng.getSelesaiBekerja()%> </li>
-                            </ul>
-                            <% } %>
+                            <h5> <%= peng.getPerusahaan()%> (<%= peng.getPosisi()%>)</h5>
+                            <p> <%= peng.getDeskripsi()%> </p>
+                            <footer class="blockquote-footer"> <%= peng.getMulaiBekerja()%> sampai <%= peng.getSelesaiBekerja()%></footer>
+                                <% } %>
                         </div>
                     </div>
                     <div class="card shadow p-3 mb-3 bg-white rounded" style="margin-top: 10px;">
@@ -118,12 +156,8 @@
                             <% KeahlianInterface ki = new KeahlianController(factorys);
                                 for (Object keahlian : ki.search(r.getId().toString())) {
                                     Keahlian keh = (Keahlian) keahlian;%>
-                            <ul>
-                                <li>
-                                    <h5><%= keh.getNama()%></h5>
-                                    <p> <%= keh.getDeskripsi()%> </p>
-                                </li>
-                            </ul>
+                            <h5><%= keh.getNama()%></h5>
+                            <p class="blockquote-footer"> <%= keh.getDeskripsi()%> </p>
                             <% }%>
                         </div>
                     </div>
@@ -132,8 +166,12 @@
                             <h3><i class="fas fa-tasks"></i> Project</h3>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Light card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <% ProjectInterface proi = new ProjectController(factorys);
+                                for (Object o : proi.search(r.getId().toString())) {
+                                    Project pro = (Project) o;%>
+                            <h5 class="card-title"><%= pro.getNama()%> (<%= pro.getStatus()%>)</h5>
+                            <p class="card-text"><%= pro.getDeskripsi()%></p>
+                            <% }%>
                         </div>
                     </div>
                 </div>

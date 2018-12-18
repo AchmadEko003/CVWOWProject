@@ -5,6 +5,7 @@
  */
 package daos;
 
+import entities.Bahasa;
 import entities.Jurusan;
 import entities.LowonganPekerjaan;
 import entities.Requirements;
@@ -308,6 +309,26 @@ public class FunctionDAO {
             session = factory.openSession();
             transaction = session.beginTransaction();
             object = (LowonganPekerjaan) session.createQuery(query).uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return object;
+    }
+    
+    public Bahasa getBahasa(Object user) {
+        Bahasa object = null;
+        String query = "from Bahasa where NAMA= '" + user + "'";
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            object = (Bahasa) session.createQuery(query).uniqueResult();
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();

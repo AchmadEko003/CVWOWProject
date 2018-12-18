@@ -6,34 +6,31 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Nitani
  */
 @Entity
-@Table(name = "bahasa")
+@Table(name = "bahasa_lang")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Bahasa.findAll", query = "SELECT b FROM Bahasa b")
-    , @NamedQuery(name = "Bahasa.findById", query = "SELECT b FROM Bahasa b WHERE b.id = :id")
-    , @NamedQuery(name = "Bahasa.findByNama", query = "SELECT b FROM Bahasa b WHERE b.nama = :nama")})
-public class Bahasa implements Serializable {
+    @NamedQuery(name = "BahasaLang.findAll", query = "SELECT b FROM BahasaLang b")
+    , @NamedQuery(name = "BahasaLang.findById", query = "SELECT b FROM BahasaLang b WHERE b.id = :id")})
+public class BahasaLang implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,26 +38,23 @@ public class Bahasa implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "NAMA")
-    private String nama;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idBahasa", fetch = FetchType.LAZY)
-    private List<BahasaLang> bahasaLangList;
+    @JoinColumn(name = "ID_BAHASA", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Bahasa idBahasa;
+    @JoinColumn(name = "ID_USER_PROFILE", referencedColumnName = "ID")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private UserProfile idUserProfile;
 
-    public Bahasa() {
+    public BahasaLang() {
     }
 
-    public Bahasa(Integer id) {
+    public BahasaLang(Integer id) {
         this.id = id;
     }
 
-    public Bahasa(String nama) {
-        this.nama = nama;
-    }
-
-    public Bahasa(Integer id, String nama) {
-        this.id = id;
-        this.nama = nama;
+    public BahasaLang(Bahasa idBahasa, UserProfile idUserProfile) {
+        this.idBahasa = idBahasa;
+        this.idUserProfile = idUserProfile;
     }
 
     public Integer getId() {
@@ -71,21 +65,20 @@ public class Bahasa implements Serializable {
         this.id = id;
     }
 
-    public String getNama() {
-        return nama;
+    public Bahasa getIdBahasa() {
+        return idBahasa;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setIdBahasa(Bahasa idBahasa) {
+        this.idBahasa = idBahasa;
     }
 
-    @XmlTransient
-    public List<BahasaLang> getBahasaLangList() {
-        return bahasaLangList;
+    public UserProfile getIdUserProfile() {
+        return idUserProfile;
     }
 
-    public void setBahasaLangList(List<BahasaLang> bahasaLangList) {
-        this.bahasaLangList = bahasaLangList;
+    public void setIdUserProfile(UserProfile idUserProfile) {
+        this.idUserProfile = idUserProfile;
     }
 
     @Override
@@ -98,10 +91,10 @@ public class Bahasa implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Bahasa)) {
+        if (!(object instanceof BahasaLang)) {
             return false;
         }
-        Bahasa other = (Bahasa) object;
+        BahasaLang other = (BahasaLang) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -110,7 +103,7 @@ public class Bahasa implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Bahasa[ id=" + id + " ]";
+        return "entities.BahasaLang[ id=" + id + " ]";
     }
     
 }

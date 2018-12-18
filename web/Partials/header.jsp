@@ -26,9 +26,6 @@
             }
         %>
         <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
-            <!--            <a class="navbar-brand" href="#">
-                            <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
-                        </a>-->
             <button type="button" class="btn btn-light">
                 <img src="../Assets/MII-logo.png" alt="Logo" style="width:40px;">
             </button>

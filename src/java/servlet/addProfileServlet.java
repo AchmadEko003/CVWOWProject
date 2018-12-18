@@ -6,6 +6,7 @@
 package servlet;
 
 import controllers.UserProfileController;
+import entities.User;
 import interfaces.UserProfileInterface;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -52,9 +53,8 @@ public class addProfileServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
             UserProfileInterface i = new UserProfileController(SessionFactory);
-            out.println(foto);
-            out.print(upload(foto));
-            if (i.inputData(nama, umur, alamat, tanggal, noTelp, upload(foto), upload(cv), upload(ktp), "1", "1")) {
+            User r = (User) session.getAttribute("userData");
+            if (i.inputData(nama, umur, alamat, tanggal, noTelp, upload(foto), upload(cv), upload(ktp), r.getId().toString())) {
                 response.sendRedirect("index.jsp");
             }
         }

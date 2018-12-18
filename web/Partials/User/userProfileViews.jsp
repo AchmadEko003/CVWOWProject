@@ -21,47 +21,47 @@
         <div class="container">
             <form method="POST" action="addProfileServlet">
                 <div class="form-group">
-                    <i class="fas fa-user"></i>
+                    <!--<i class="fas fa-user"></i>-->
                     <label for="exampleInputEmail1">Name</label>
-                    <input name="nama" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="name" placeholder="Name">
+                    <input name="nama" type="text" class="form-control" aria-describedby="name" placeholder="Name">
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-envelope"></i>
+                    <!--<i class="fas fa-envelope"></i>-->
                     <label for="exampleInputEmail1">Umur</label>
-                    <input name="umur" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input name="umur" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
+                    <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">alamat</label>
-                    <textarea name="alamat" class="form-control" id="exampleInputPassword1" placeholder="Password"></textarea>
+                    <textarea name="alamat" class="form-control" placeholder="Password"></textarea>
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
+                    <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">Tanggal lahir</label>
-                    <input name="tglLahir" type="date" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                    <input name="tglLahir" type="date" class="form-control" placeholder="Confirm Password">
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
+                    <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">No Telp</label>
-                    <input name="telp" type="text" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                    <input name="telp" type="text" class="form-control" placeholder="Confirm Password">
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
+                    <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">Foto</label>
-                    <input name="foto" type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                    <input name="foto" type="file" class="form-control-file"  aria-describedby="fileHelp">
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
+                    <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">CV</label>
-                    <input name="cv" type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                    <input name="cv" type="file" class="form-control-file" aria-describedby="fileHelp">
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
+                    <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">KTP</label>
-                    <input name="ktp" type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                    <input name="ktp" type="file" class="form-control-file" aria-describedby="fileHelp">
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-info btn-lg btn-block">Register <i class="fab fa-telegram-plane"></i>
+                    <input type="submit" class="btn btn-info btn-lg btn-block" value="Submit">
                 </div>
             </form>
         </div>

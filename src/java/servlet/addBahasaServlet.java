@@ -5,10 +5,12 @@
  */
 package servlet;
 
-import controllers.PengalamanController;
-import entities.User;
+import controllers.BahasaLangController;
+import controllers.KeahlianController;
+import entities.Bahasa;
 import entities.UserProfile;
-import interfaces.PengalamanInterface;
+import interfaces.BahasaLangInterface;
+import interfaces.KeahlianInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -24,8 +26,8 @@ import tools.HibernateUtil;
  *
  * @author Nitani
  */
-@WebServlet(name = "addPengalamanView", urlPatterns = {"/addPengalamanView"})
-public class addPengalamanServlet extends HttpServlet {
+@WebServlet(name = "addBahasaServlet", urlPatterns = {"/addBahasaServlet"})
+public class addBahasaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,17 +41,16 @@ public class addPengalamanServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String deskripsi = request.getParameter("deskripsi");
-        String perusahaan = "Mitra Integrasi Informatika";
-        String posisi = request.getParameter("posisi");
-        String mulaiBekerja = request.getParameter("mulaiBekerja");
-        String selesaiBekerja = request.getParameter("selesaiBekerja");
+        String nama = request.getParameter("nama");
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
-            SessionFactory sessionFactory = new HibernateUtil().getSessionFactory();
-            PengalamanInterface i = new PengalamanController(sessionFactory);
+            SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
+            BahasaLangInterface i = new BahasaLangController(SessionFactory);
             UserProfile r = (UserProfile) session.getAttribute("profile");
-            if (i.insert(deskripsi, perusahaan, posisi, mulaiBekerja, selesaiBekerja, r.getId().toString())) {
+            Bahasa b = (Bahasa) i.getById(nama);
+            out.print(b.getId());
+            out.print(nama);
+            if (i.insert(b.getId().toString(), r.getId().toString())); {
                 response.sendRedirect("index.jsp");
             }
         }

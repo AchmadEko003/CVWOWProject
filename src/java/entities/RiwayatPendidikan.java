@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "RiwayatPendidikan.findAll", query = "SELECT r FROM RiwayatPendidikan r")
     , @NamedQuery(name = "RiwayatPendidikan.findById", query = "SELECT r FROM RiwayatPendidikan r WHERE r.id = :id")
-    , @NamedQuery(name = "RiwayatPendidikan.findByInstansi", query = "SELECT r FROM RiwayatPendidikan r WHERE r.instansi = :instansi")
     , @NamedQuery(name = "RiwayatPendidikan.findByIpk", query = "SELECT r FROM RiwayatPendidikan r WHERE r.ipk = :ipk")})
 public class RiwayatPendidikan implements Serializable {
 
@@ -40,12 +40,10 @@ public class RiwayatPendidikan implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "INSTANSI")
-    private String instansi;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "IPK")
-    private int ipk;
+    private BigDecimal ipk;
     @JoinColumn(name = "JURUSAN_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Jurusan jurusanId;
@@ -63,14 +61,20 @@ public class RiwayatPendidikan implements Serializable {
         this.id = id;
     }
 
-    public RiwayatPendidikan(Integer id, String instansi, int ipk) {
+    public RiwayatPendidikan(Integer id, BigDecimal ipk) {
         this.id = id;
-        this.instansi = instansi;
         this.ipk = ipk;
     }
 
-    public RiwayatPendidikan(String instansi, int ipk, Jurusan jurusanId, Universitas universitasId, UserProfile userProfileId) {
-        this.instansi = instansi;
+    public RiwayatPendidikan(BigDecimal ipk, Jurusan jurusanId, Universitas universitasId, UserProfile userProfileId) {
+        this.ipk = ipk;
+        this.jurusanId = jurusanId;
+        this.universitasId = universitasId;
+        this.userProfileId = userProfileId;
+    }
+
+    public RiwayatPendidikan(Integer id, BigDecimal ipk, Jurusan jurusanId, Universitas universitasId, UserProfile userProfileId) {
+        this.id = id;
         this.ipk = ipk;
         this.jurusanId = jurusanId;
         this.universitasId = universitasId;
@@ -85,19 +89,11 @@ public class RiwayatPendidikan implements Serializable {
         this.id = id;
     }
 
-    public String getInstansi() {
-        return instansi;
-    }
-
-    public void setInstansi(String instansi) {
-        this.instansi = instansi;
-    }
-
-    public int getIpk() {
+    public BigDecimal getIpk() {
         return ipk;
     }
 
-    public void setIpk(int ipk) {
+    public void setIpk(BigDecimal ipk) {
         this.ipk = ipk;
     }
 

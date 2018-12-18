@@ -56,6 +56,8 @@ public class UserProfile implements Serializable {
     @Lob
     @Column(name = "KTP")
     private byte[] ktp;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
+    private List<RiwayatPendidikan> riwayatPendidikanList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -80,24 +82,11 @@ public class UserProfile implements Serializable {
     @Basic(optional = false)
     @Column(name = "NO_TELPON")
     private int noTelpon;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
-    private List<Pencapaian> pencapaianList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
-    private List<Project> projectList;
-    @JoinColumn(name = "BAHASA_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Bahasa bahasaId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUserProfile", fetch = FetchType.LAZY)
+    private List<BahasaLang> bahasaLangList;
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
-    private List<Keahlian> keahlianList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
-    private List<Sertifikat> sertifikatList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
-    private List<RiwayatPendidikan> riwayatPendidikanList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
-    private List<Pengalaman> pengalamanList;
 
     public UserProfile() {
     }
@@ -118,7 +107,7 @@ public class UserProfile implements Serializable {
         this.ktp = ktp;
     }
 
-    public UserProfile(String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp, Bahasa bahasaId, User userId) {
+    public UserProfile(String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp, User userId) {
         this.nama = nama;
         this.umur = umur;
         this.alamat = alamat;
@@ -127,10 +116,9 @@ public class UserProfile implements Serializable {
         this.foto = foto;
         this.cv = cv;
         this.ktp = ktp;
-        this.bahasaId = bahasaId;
         this.userId = userId;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -181,29 +169,12 @@ public class UserProfile implements Serializable {
 
 
     @XmlTransient
-    public List<Pencapaian> getPencapaianList() {
-        return pencapaianList;
+    public List<BahasaLang> getBahasaLangList() {
+        return bahasaLangList;
     }
 
-    public void setPencapaianList(List<Pencapaian> pencapaianList) {
-        this.pencapaianList = pencapaianList;
-    }
-
-    @XmlTransient
-    public List<Project> getProjectList() {
-        return projectList;
-    }
-
-    public void setProjectList(List<Project> projectList) {
-        this.projectList = projectList;
-    }
-
-    public Bahasa getBahasaId() {
-        return bahasaId;
-    }
-
-    public void setBahasaId(Bahasa bahasaId) {
-        this.bahasaId = bahasaId;
+    public void setBahasaLangList(List<BahasaLang> bahasaLangList) {
+        this.bahasaLangList = bahasaLangList;
     }
 
     public User getUserId() {
@@ -212,42 +183,6 @@ public class UserProfile implements Serializable {
 
     public void setUserId(User userId) {
         this.userId = userId;
-    }
-
-    @XmlTransient
-    public List<Keahlian> getKeahlianList() {
-        return keahlianList;
-    }
-
-    public void setKeahlianList(List<Keahlian> keahlianList) {
-        this.keahlianList = keahlianList;
-    }
-
-    @XmlTransient
-    public List<Sertifikat> getSertifikatList() {
-        return sertifikatList;
-    }
-
-    public void setSertifikatList(List<Sertifikat> sertifikatList) {
-        this.sertifikatList = sertifikatList;
-    }
-
-    @XmlTransient
-    public List<RiwayatPendidikan> getRiwayatPendidikanList() {
-        return riwayatPendidikanList;
-    }
-
-    public void setRiwayatPendidikanList(List<RiwayatPendidikan> riwayatPendidikanList) {
-        this.riwayatPendidikanList = riwayatPendidikanList;
-    }
-
-    @XmlTransient
-    public List<Pengalaman> getPengalamanList() {
-        return pengalamanList;
-    }
-
-    public void setPengalamanList(List<Pengalaman> pengalamanList) {
-        this.pengalamanList = pengalamanList;
     }
 
     @Override
@@ -273,6 +208,16 @@ public class UserProfile implements Serializable {
     @Override
     public String toString() {
         return "entities.UserProfile[ id=" + id + " ]";
+    }
+
+
+    @XmlTransient
+    public List<RiwayatPendidikan> getRiwayatPendidikanList() {
+        return riwayatPendidikanList;
+    }
+
+    public void setRiwayatPendidikanList(List<RiwayatPendidikan> riwayatPendidikanList) {
+        this.riwayatPendidikanList = riwayatPendidikanList;
     }
 
     public byte[] getFoto() {

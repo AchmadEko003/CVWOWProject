@@ -41,7 +41,7 @@ public class UserController implements UserInterface {
     public boolean register(String nama, String email, String password) {
         boolean hasil = false;
         try {
-            User use = new User(nama, email, password, new Role(3));
+            User use = new User(nama, email, password, new Role(1));
             if (daoid.doDML(use, false)) {
                 hasil = true;
             }

@@ -7,6 +7,7 @@ package servlet;
 
 import controllers.SertifikatController;
 import entities.User;
+import entities.UserProfile;
 import interfaces.SertifikatInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,7 +45,7 @@ public class addSertifikatServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
            SessionFactory sessionFactory = new HibernateUtil().getSessionFactory();
             SertifikatInterface i = new SertifikatController(sessionFactory);
-            User r = (User) session.getAttribute("userData");
+            UserProfile r = (UserProfile) session.getAttribute("profile");
             if (i.inputData(nama, deskripsi, r.getId().toString())) {
                 response.sendRedirect("index.jsp");
             }

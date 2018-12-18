@@ -24,4 +24,5 @@ public interface DAOInterface {
     public Object getAttributPendidikan(Object table, Object id);
     public Object getAttributReq(Object id);
     public Object getLoker(Object id);
+    public Object getAttributBahasa(Object id);
 }

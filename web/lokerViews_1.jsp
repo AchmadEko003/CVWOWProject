@@ -57,7 +57,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                <%@include file="Partials/User/applyView.jsp" %>
+                <%--<%@include file="Partials/User/applyView.jsp" %>--%>
                                             </div>
                                         </div>
                                     </div>

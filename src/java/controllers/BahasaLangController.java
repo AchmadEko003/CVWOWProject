@@ -7,12 +7,10 @@ package controllers;
 
 import daos.DAOInterface;
 import daos.GeneralDAO;
-import entities.Jurusan;
-import entities.RiwayatPendidikan;
-import entities.Universitas;
+import entities.Bahasa;
+import entities.BahasaLang;
 import entities.UserProfile;
-import interfaces.PendidikanInterface;
-import java.math.BigDecimal;
+import interfaces.BahasaLangInterface;
 import java.util.List;
 import org.hibernate.SessionFactory;
 
@@ -20,16 +18,16 @@ import org.hibernate.SessionFactory;
  *
  * @author Nitani
  */
-public class PendidikanController implements PendidikanInterface{
-    
+public class BahasaLangController implements BahasaLangInterface {
+
     private SessionFactory factory;
     private GeneralDAO gdao = new GeneralDAO(factory);
     private DAOInterface daoid = new GeneralDAO(factory);
 
-    public PendidikanController() {
+    public BahasaLangController() {
     }
 
-    public PendidikanController(SessionFactory factory) {
+    public BahasaLangController(SessionFactory factory) {
         this.factory = factory;
         this.gdao = new GeneralDAO(factory);
         this.daoid = new GeneralDAO(factory);
@@ -37,14 +35,14 @@ public class PendidikanController implements PendidikanInterface{
 
     @Override
     public List<Object> search(String keyword) {
-        return this.daoid.doDDL(new RiwayatPendidikan(), keyword);
+        return this.daoid.doDDL(new BahasaLang(), keyword);
     }
 
     @Override
-    public boolean insert(String ipk, String jurusanId, String universitasId, String userProfileId) {
+    public boolean insert(String user, String bahasa) {
         boolean hasil = false;
         try {
-            RiwayatPendidikan use = new RiwayatPendidikan(new BigDecimal(ipk), new Jurusan(Integer.valueOf(jurusanId)), new Universitas(Integer.valueOf(universitasId)), new UserProfile(Integer.valueOf(userProfileId)));
+            BahasaLang use = new BahasaLang(new Bahasa(Integer.valueOf(bahasa)), new UserProfile(Integer.valueOf(user)));
             if (daoid.doDML(use, false)) {
                 hasil = true;
             }
@@ -55,8 +53,13 @@ public class PendidikanController implements PendidikanInterface{
     }
 
     @Override
-    public List<Object> getAll(String keyword) {
+    public boolean delete(String id, String nama) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object getById(Object id) {
+        return this.daoid.getAttributBahasa(id);
     }
 
 }

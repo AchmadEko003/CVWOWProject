@@ -5,10 +5,6 @@
  */
 package servlet;
 
-import controllers.PengalamanController;
-import entities.User;
-import entities.UserProfile;
-import interfaces.PengalamanInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,15 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.hibernate.SessionFactory;
-import tools.HibernateUtil;
 
 /**
  *
  * @author Nitani
  */
-@WebServlet(name = "addPengalamanView", urlPatterns = {"/addPengalamanView"})
-public class addPengalamanServlet extends HttpServlet {
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/logoutServlet"})
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,19 +33,10 @@ public class addPengalamanServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String deskripsi = request.getParameter("deskripsi");
-        String perusahaan = "Mitra Integrasi Informatika";
-        String posisi = request.getParameter("posisi");
-        String mulaiBekerja = request.getParameter("mulaiBekerja");
-        String selesaiBekerja = request.getParameter("selesaiBekerja");
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
-            SessionFactory sessionFactory = new HibernateUtil().getSessionFactory();
-            PengalamanInterface i = new PengalamanController(sessionFactory);
-            UserProfile r = (UserProfile) session.getAttribute("profile");
-            if (i.insert(deskripsi, perusahaan, posisi, mulaiBekerja, selesaiBekerja, r.getId().toString())) {
-                response.sendRedirect("index.jsp");
-            }
+            session.invalidate();
+            response.sendRedirect("home.jsp");
         }
     }
 

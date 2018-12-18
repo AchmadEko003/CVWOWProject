@@ -7,6 +7,7 @@ package servlet;
 
 import controllers.ProjectController;
 import entities.User;
+import entities.UserProfile;
 import interfaces.ProjectInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,7 +49,7 @@ public class addProjectServlet extends HttpServlet {
             out.print(status);
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
             ProjectInterface i = new ProjectController(SessionFactory);
-            User r = (User) session.getAttribute("userData");
+            UserProfile r = (UserProfile) session.getAttribute("profile");
             if (i.insert(nama, deskripsi, status, r.getId().toString())); {
                 response.sendRedirect("index.jsp");
             }

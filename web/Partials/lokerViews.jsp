@@ -29,43 +29,112 @@
     <body class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
             <button type="button" class="btn btn-light">
-                <img src="../Assets/MII-logo.png" alt="Logo" style="width:40px;">
+                <a href="../index.jsp">
+                    <img src="../Assets/MII-logo.png" alt="Logo" style="width:40px;">
+                </a>
             </button>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Partials/lokerViews.jsp">Lowongan Kerja</a>
+                    </li>
                     <li class="nav-item active">
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Home</a>
-
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#keahlianModal">Keahlian</a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sertifikatModal">Sertifikat</a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#projectModal">Project</a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pengalamanModal">Pengalaman</a>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#riwayatPendidikanModal">Pendidikan</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pendidikanModal">Pendidikan</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#bahasaModal">Bahasa</a>
                             </div>
                         </div>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="Partials/lokerViews.jsp">Lowongan Kerja</a>
                     </li>
                 </ul>
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModalCenter">
-                            Login
+                        <button type="button" class="btn btn-outline-light" href="logoutServlet" onclick="deletes()">
+                            Logout
                         </button>
                     </li>
                 </ul>
             </div>
         </nav>
+
+        <!-- Modal Keahlian -->
+        <div class="modal fade" id="keahlianModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="User/keahlianView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Sertifikat -->
+        <div class="modal fade" id="sertifikatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="User/sertifikatView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Project -->
+        <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="User/projectView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pengalaman -->
+        <div class="modal fade" id="pengalamanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="User/pengalamanView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pendidikan -->
+        <div class="modal fade" id="pendidikanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="User/riwayatPendidikanView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Bahasa -->
+        <div class="modal fade" id="bahasaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="Partials/User/bahasaView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
             <div class="row">
-                
+
                 <div class="col-sm-9">
                     <% SessionFactory factory = HibernateUtil.getSessionFactory();
                         LokerInterface li = new LokerController(factory);
@@ -81,22 +150,47 @@
                             <h5 class="card-title">Mitra Integrasi Informatika</h5>
                             <p class="card-text"><%= lowker.getDeskripsi()%></p>
                             <footer class="blockquote-footer">Waktu berahir <cite title="Source Title"><%= formats.format((hire))%></cite></footer>
-                            <a href="../applyLokerServlet?id=<%= lowker.getId()%>" class="card-link" data-toggle="modal" data-target="#cvModal">Apply</a>
+                            <a href="../applyLokerServlet?id=<%= lowker.getId()%>" class="card-link" onclick="return confirm('Ingin melamar di lowongan ini?');">Apply</a>
                         </div>
                     </div>
                     <% }%>
                 </div>
 
-                <!-- Modal Keahlian -->
-<!--                <div class="modal fade" id="cvModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <%@include file="User/applyView.jsp" %>
-                            </div>
+                <footer class="fixed-bottom">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-bottom">
+                        <div class="container">
+                            <p class="text-light">&copy; 2018 Mitra Integrasi Informatika. All rights reserved.</p>
                         </div>
-                    </div>
-                </div>-->
+                    </nav>
+                </footer>
+
+                <script>
+                    function deletes() {
+                        swal({
+                            title: "Ingin logout?",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        swal("Berhasil logout", {
+                                            icon: "success",
+                                        });
+                                        window.location.href = "logoutServlet";
+                                    }
+                                });
+                    }
+
+                    function logins() {
+                        swal({
+                            title: "Berhasil login",
+                            icon: "success",
+                            buttons: true,
+                        })
+                        window.location.href = "loginServlet";
+                    }
+                </script>
             </div>
         </div>
     </body>

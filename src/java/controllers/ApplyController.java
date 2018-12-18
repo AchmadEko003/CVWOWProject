@@ -42,9 +42,6 @@ public class ApplyController implements ApplyInterface {
     public boolean insert(String status, String lowonganId, String userId) {
         boolean hasil = false;
         try {
-            System.out.println(status);
-            System.out.println(lowonganId);
-            System.out.println(userId);
             Apply use = new Apply(status, new LowonganPekerjaan(Integer.valueOf(lowonganId)), new User(Integer.valueOf(userId)));
             if (daoid.doDML(use, false)) {
                 hasil = true;

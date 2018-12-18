@@ -12,6 +12,7 @@ import controllers.UniversitasController;
 import entities.Jurusan;
 import entities.Universitas;
 import entities.User;
+import entities.UserProfile;
 import interfaces.JurusanInterface;
 import interfaces.KeahlianInterface;
 import interfaces.PendidikanInterface;
@@ -56,11 +57,13 @@ public class addPendidikan extends HttpServlet {
             PendidikanInterface i = new PendidikanController(SessionFactory);
             UniversitasInterface ui = new UniversitasController(SessionFactory);
             JurusanInterface ji = new JurusanController(SessionFactory);
-            User r = (User) session.getAttribute("userData");
+            UserProfile r = (UserProfile) session.getAttribute("profile");
             Universitas u = (Universitas) ui.getById(univ);
             Jurusan j = (Jurusan) ji.getById(jurusan);
-            
-            if (i.insert(instansi, ipk, j.getId().toString(), u.getId().toString(), r.getId().toString())); {
+            out.print(univ);
+            out.print(jurusan);
+            out.print(ipk);
+            if (i.insert(ipk, j.getId().toString(), u.getId().toString(), r.getId().toString())); {
                 response.sendRedirect("index.jsp");
             }
         }

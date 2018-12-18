@@ -19,14 +19,6 @@
 
     </head>
     <body>
-        <% String idUser = "", emails = "", role = "", decodedUrl = "";
-            if (session.getAttribute("userData") != null) {
-                User r = (User) session.getAttribute("userData");
-                idUser = r.getId().toString();
-                emails = r.getEmail();
-                role = r.getRoleId().getStatus().toLowerCase();
-            }
-        %>
         <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
             <button type="button" class="btn btn-light">
                 <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
@@ -38,13 +30,13 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        
+
                     </li>
                     <li class="nav-item">
-                       
+
                     </li>
                     <li class="nav-item">
-                        
+
                     </li>
                 </ul>
                 <ul class="nav justify-content-end">
@@ -142,18 +134,18 @@
                 </div>
             </div>
         </div>
-        
-                    
-        <div>
-            
-            <%@include file="lokerViews_1.jsp" %>
 
+
+        <div class="mx-auto">
+            <%@include file="lokerViews_1.jsp" %>
         </div>
-            
+
         <footer class="fixed-bottom">
-            <div class="container">
-                <p>&copy; 2018 Mitra Integrasi Informatika. All rights reserved.</p>
-            </div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-bottom">
+                <div class="container">
+                    <p class="text-light">&copy; 2018 Mitra Integrasi Informatika. All rights reserved.</p>
+                </div>
+            </nav>
         </footer>
     </body>
 </html>

@@ -7,6 +7,7 @@ package servlet;
 
 import controllers.SertifikatController;
 import entities.Sertifikat;
+import entities.UserProfile;
 import interfaces.SertifikatInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
 
@@ -37,11 +39,12 @@ public class sertifikatServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String namas = request.getParameter("nama");
         String lembagas = request.getParameter("lembaga");
+        HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
             SessionFactory sessionFactory = new HibernateUtil().getSessionFactory();
             SertifikatInterface i = new SertifikatController(sessionFactory);
-            
-            if (i.inputData(namas, lembagas, "7")) {
+            UserProfile r = (UserProfile) session.getAttribute("profile");
+            if (i.inputData(namas, lembagas, r.getId().toString())) {
                 out.print("Berhasil");
             }
         }

@@ -5,8 +5,11 @@
  */
 package servlet;
 
+import controllers.ApplyController;
 import controllers.LokerController;
 import entities.LowonganPekerjaan;
+import entities.User;
+import interfaces.ApplyInterface;
 import interfaces.LokerInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,14 +40,24 @@ public class applyLokerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("ids");
+        String id = request.getParameter("id");
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
             LokerInterface i = new LokerController(HibernateUtil.getSessionFactory());
+            ApplyInterface ia = new ApplyController(HibernateUtil.getSessionFactory());
             LowonganPekerjaan r = (LowonganPekerjaan) i.getByIds(id);
             out.print(id);
+            out.println(r.getId());
+            out.println(r.getDeskripsi());
+            out.println(r.getJudul());
+            out.println(r.getTanggalMulai());
+            out.println(r.getTanggalSelesai());
+            out.println(r.getUserId());
             session.setAttribute("idsa", r);
-            response.sendRedirect("Partials/User/applyView.jsp");
+            User ra = (User) session.getAttribute("userData");
+            if (ia.insert("Apply", id, ra.getId().toString())) {
+                response.sendRedirect("index.jsp");
+            }
         }
     }
 

@@ -96,4 +96,9 @@ public class GeneralDAO implements DAOInterface {
     public Object getLoker(Object id) {
         return this.fdao.getLoker(id);
     }
+
+    @Override
+    public Object getAttributBahasa(Object id) {
+        return this.fdao.getBahasa(id);
+    }
 }
