@@ -5,26 +5,17 @@
  */
 package servlet;
 
-import controllers.UserProfileController;
+import controllers.ProjectController;
 import entities.User;
-import interfaces.UserProfileInterface;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import interfaces.ProjectInterface;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Base64;
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
 
@@ -32,8 +23,8 @@ import tools.HibernateUtil;
  *
  * @author Nitani
  */
-@WebServlet(name = "TambahUserProfile", urlPatterns = {"/tambahUserProfile"})
-public class TambahUserProfile extends HttpServlet {
+@WebServlet(name = "addProjectServlet", urlPatterns = {"/addProjectServlet"})
+public class addProjectServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,39 +39,19 @@ public class TambahUserProfile extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String nama = request.getParameter("nama");
-        String umur = request.getParameter("umur");
-        String alamat = request.getParameter("alamat");
-        String tanggal = request.getParameter("tglLahir");
-        String noTelp = request.getParameter("telp");
-        String foto = request.getParameter("foto");
-        
+        String deskripsi = request.getParameter("deskripsi");
+        String status = request.getParameter("status");
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
+            out.print(nama);
+            out.print(deskripsi);
+            out.print(status);
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
-            UserProfileInterface i = new UserProfileController(SessionFactory);
-
-            File file = new File(foto);
-            BufferedImage bufferedImage = ImageIO.read(file);
-            String a = bufferedImage.toString();
-            String encodedUrl1 = Base64.getUrlEncoder().encodeToString(a.getBytes());
-
-            byte[] decodedBytes = Base64.getUrlDecoder().decode(encodedUrl1);
-            String decodedUrl = new String(decodedBytes);
-            out.print("4");
-            User u = (User) session.getAttribute("userData");
-//            out.print(u.getId());
-//            out.print(nama);
-//            out.print(umur);
-//            out.print(alamat);
-            out.print(tanggal);
-            out.println(encodedUrl1);
-            out.print(decodedUrl);
-//            if(i.inputData(nama, umur, alamat, tanggal, noTelp, "", "", "", String.valueOf(u.getId()), "2")){
-//            out.print("Berhasil");
-//            }
-//            out.print(i);
-//            i.register(usersName, emails, BCrypt.hashpw(password, BCrypt.gensalt()));
-//            response.sendRedirect("/index.jsp");
+            ProjectInterface i = new ProjectController(SessionFactory);
+            User r = (User) session.getAttribute("userData");
+            if (i.insert(nama, deskripsi, status, r.getId().toString())); {
+                response.sendRedirect("index.jsp");
+            }
         }
     }
 

@@ -44,6 +44,19 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "UserProfile.findByNoTelpon", query = "SELECT u FROM UserProfile u WHERE u.noTelpon = :noTelpon")})
 public class UserProfile implements Serializable {
 
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "FOTO")
+    private byte[] foto;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "CV")
+    private byte[] cv;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "KTP")
+    private byte[] ktp;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,18 +80,6 @@ public class UserProfile implements Serializable {
     @Basic(optional = false)
     @Column(name = "NO_TELPON")
     private int noTelpon;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "FOTO")
-    private byte[] foto;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "CV")
-    private byte[] cv;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "KTP")
-    private byte[] ktp;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
     private List<Pencapaian> pencapaianList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
@@ -178,29 +179,6 @@ public class UserProfile implements Serializable {
         this.noTelpon = noTelpon;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
-    public byte[] getCv() {
-        return cv;
-    }
-
-    public void setCv(byte[] cv) {
-        this.cv = cv;
-    }
-
-    public byte[] getKtp() {
-        return ktp;
-    }
-
-    public void setKtp(byte[] ktp) {
-        this.ktp = ktp;
-    }
 
     @XmlTransient
     public List<Pencapaian> getPencapaianList() {
@@ -295,6 +273,30 @@ public class UserProfile implements Serializable {
     @Override
     public String toString() {
         return "entities.UserProfile[ id=" + id + " ]";
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public byte[] getCv() {
+        return cv;
+    }
+
+    public void setCv(byte[] cv) {
+        this.cv = cv;
+    }
+
+    public byte[] getKtp() {
+        return ktp;
+    }
+
+    public void setKtp(byte[] ktp) {
+        this.ktp = ktp;
     }
     
 }

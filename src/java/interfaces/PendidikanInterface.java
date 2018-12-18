@@ -5,6 +5,9 @@
  */
 package interfaces;
 
+import entities.Jurusan;
+import entities.Universitas;
+import entities.UserProfile;
 import java.util.List;
 
 /**
@@ -14,6 +17,7 @@ import java.util.List;
 public interface PendidikanInterface {
     
     public List<Object> search(String keyword);
-    public boolean insert(String id, String judul, String deskripsi, String requirements, String tanggal, String tanggalSelesai, String userId);
+    public List<Object> getAll(String keyword);
+    public boolean insert(String instansi, String ipk, String jurusanId, String universitasId, String userProfileId);
     
 }

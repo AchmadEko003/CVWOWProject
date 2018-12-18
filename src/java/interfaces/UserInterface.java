@@ -12,9 +12,14 @@ import java.util.List;
  * @author Nitani
  */
 public interface UserInterface {
+
     public List<Object> search(String keyword);
+
     public boolean register(String nama, String email, String password);
+
     public boolean login(Object nama, String password);
+
     public Object getById(Object id);
+
     public Integer getUser(Object user);
 }

@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -25,16 +25,12 @@
                 idUser = r.getId().toString();
                 emails = r.getEmail();
                 role = r.getRoleId().getStatus().toLowerCase();
-                out.print(emails);
             }
         %>
         <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
-            <!--            <a class="navbar-brand" href="#">
-                            <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
-                        </a>-->
-            <button type="button" class="btn btn-light">
+            <a type="button" class="btn btn-light">
                 <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
-            </button>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -46,28 +42,27 @@
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Home</a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#keahlianModal">Keahlian</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sertifikatModal">Sertifikat</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#projectModal">Project</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pengalamanModal">Pengalaman</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#riwayatPendidikanModal">Pendidikan</a>
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Partials/lokerViews.jsp">Lowongan Kerja</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Loker</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#userModal">Edit Profile</a>
                     </li>
                 </ul>
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <% // if(session.getAttribute("userData") == null) { %>
                         <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModalCenter">
                             Login
                         </button>
-                        <% // } else { %>
-                        <a class="btn btn-outline-light" href="loginServlet" role="button">Logout</a>
-                        <% // } %>
                     </li>
                 </ul>
             </div>
@@ -79,14 +74,14 @@
                 <div class="modal-content">
 
                     <div class="modal-body">
-                        <%--<%@include file="Partials/cvView.jsp" %>--%>
+                        <%--<%@include file="Partials/User/cvView.jsp" %>--%>
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal Login-->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -112,7 +107,7 @@
                                         <div class="form-group">
                                             <i class="fas fa-envelope"></i>
                                             <label for="exampleInputEmail1">Email address</label>
-                                            <input name="emailsa" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                            <input name="emailsa" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@gmail.com">
                                         </div>
                                         <div class="form-group">
                                             <i class="fas fa-lock"></i>
@@ -120,7 +115,7 @@
                                             <input name="passwords" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-info btn-lg btn-block">Login
+                                            <input type="submit" class="btn btn-info btn-lg btn-block" value="Login">
                                         </div>
                                     </form>
                                 </div>
@@ -135,7 +130,7 @@
                                         <div class="form-group">
                                             <i class="fas fa-envelope"></i>
                                             <label for="exampleInputEmail1">Email address</label>
-                                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@gmail.com">
                                         </div>
                                         <div class="form-group">
                                             <i class="fas fa-lock"></i>
@@ -148,7 +143,7 @@
                                                                                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
                                                                             </div>-->
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-info btn-lg btn-block">Register <i class="fab fa-telegram-plane"></i>
+                                            <input type="submit" class="btn btn-info btn-lg btn-block" value="Register">
                                         </div>
                                     </form>
                                 </div>
@@ -159,18 +154,85 @@
             </div>
         </div>
 
-        <% if (role.equals("user")) { %>
-        <%@include file="Partials/cvView.jsp" %>
-        <% // } else if (role.equals("admin")) { %>
-        <% } else if (role.equals("admin")) {
-        %>
-        <%@include file="Partials/userProfileViews.jsp" %>
-        <% }%>
+        <!-- Modal Keahlian -->
+        <div class="modal fade" id="keahlianModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="Partials/User/keahlianView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-bottom">
-            <div class="text-center">
+        <!-- Modal Sertifikat -->
+        <div class="modal fade" id="sertifikatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="Partials/User/sertifikatView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Project -->
+        <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="Partials/User/projectView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pengalaman -->
+        <div class="modal fade" id="pengalamanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="Partials/User/pengalamanView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pendidikan -->
+        <div class="modal fade" id="riwayatPendidikanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="Partials/User/riwayatPendidikanView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pendidikan -->
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="Partials/User/userProfileViews.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <% if (role.equals("user")) {
+            %>
+            <%@include file="Partials/User/cvView.jsp" %>
+            <% } else if (role.equals("admin")) { %>
+            <%@include file="Partials/Admin/adminView.jsp" %>
+            <% }%>
+        </div>
+
+        <footer class="fixed-bottom">
+            <div class="container">
                 <p>&copy; 2018 Mitra Integrasi Informatika. All rights reserved.</p>
             </div>
-        </nav>
+        </footer>
     </body>
 </html>

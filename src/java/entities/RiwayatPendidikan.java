@@ -69,6 +69,14 @@ public class RiwayatPendidikan implements Serializable {
         this.ipk = ipk;
     }
 
+    public RiwayatPendidikan(String instansi, int ipk, Jurusan jurusanId, Universitas universitasId, UserProfile userProfileId) {
+        this.instansi = instansi;
+        this.ipk = ipk;
+        this.jurusanId = jurusanId;
+        this.universitasId = universitasId;
+        this.userProfileId = userProfileId;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -13,6 +13,8 @@ import entities.User;
 import interfaces.LokerInterface;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -46,9 +48,16 @@ public class LokerController implements LokerInterface {
     public boolean insert(String judul, String deskripsi, String tanggalSelesai, String requirementsId, String userId) {
         boolean hasil = false;
         try {
-            DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            System.out.println("1");
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            System.out.println("2");
             Date dates = format.parse(tanggalSelesai);
-            LowonganPekerjaan use = new LowonganPekerjaan(judul, deskripsi, dates, new Requirements(Integer.valueOf(requirementsId)), new User(Integer.valueOf(userId)));
+            LocalDate localDate = LocalDate.now();
+            String tglMulai = dtf.format(localDate);
+            Date mulai = format.parse(tglMulai);
+            System.out.println(mulai);
+            LowonganPekerjaan use = new LowonganPekerjaan(judul, deskripsi, mulai, dates, new Requirements(Integer.valueOf(requirementsId)), new User(Integer.valueOf(userId)));
             if (daoid.doDML(use, false)) {
                 hasil = true;
             }
@@ -56,6 +65,11 @@ public class LokerController implements LokerInterface {
             e.getMessage();
         }
         return hasil;
+    }
+
+    @Override
+    public Object getByIds(Object id) {
+        return this.daoid.getLoker(id);
     }
 
 }

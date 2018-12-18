@@ -5,14 +5,17 @@
  */
 package servlet;
 
+import controllers.LokerController;
 import controllers.UserController;
 import controllers.UserProfileController;
 import entities.User;
 import entities.UserProfile;
+import interfaces.LokerInterface;
 import interfaces.UserInterface;
 import interfaces.UserProfileInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,7 +61,11 @@ public class LoginServlet extends HttpServlet {
                 UserProfile up = (UserProfile) ri.getById(r.getId());
                 session.setAttribute("profile", up);
                 session.setAttribute("userData", r);
-                response.sendRedirect("Partials/header.jsp");
+
+                LokerInterface li = new LokerController(HibernateUtil.getSessionFactory());
+                List<Object> datas = li.search("");
+                session.setAttribute("lokerData", datas);
+                response.sendRedirect("index.jsp");
             } else {
                 out.print("gagal");
             }

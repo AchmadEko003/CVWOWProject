@@ -21,4 +21,7 @@ public interface DAOInterface {
     public boolean login(Object user, String password);
     public Integer getUser(Object user);
     public Object getIdProfile(Object id);
+    public Object getAttributPendidikan(Object table, Object id);
+    public Object getAttributReq(Object id);
+    public Object getLoker(Object id);
 }

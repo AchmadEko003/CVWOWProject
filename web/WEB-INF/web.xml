@@ -12,6 +12,10 @@
         <servlet-name>getProfileServlet</servlet-name>
         <servlet-class>servlet.getProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sertifikatServlet</servlet-name>
+        <servlet-class>servlet.sertifikatServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/registerServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>getProfileServlet</servlet-name>
         <url-pattern>/getProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sertifikatServlet</servlet-name>
+        <url-pattern>/sertifikatServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

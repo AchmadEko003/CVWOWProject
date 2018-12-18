@@ -52,7 +52,7 @@ public class Pengalaman implements Serializable {
     private String deskripsi;
     @Basic(optional = false)
     @Column(name = "PERUSAHAAN")
-    private int perusahaan;
+    private String perusahaan;
     @Basic(optional = false)
     @Column(name = "POSISI")
     private String posisi;
@@ -75,13 +75,22 @@ public class Pengalaman implements Serializable {
         this.id = id;
     }
 
-    public Pengalaman(Integer id, String deskripsi, int perusahaan, String posisi, Date mulaiBekerja, Date selesaiBekerja) {
+    public Pengalaman(Integer id, String deskripsi, String perusahaan, String posisi, Date mulaiBekerja, Date selesaiBekerja) {
         this.id = id;
         this.deskripsi = deskripsi;
         this.perusahaan = perusahaan;
         this.posisi = posisi;
         this.mulaiBekerja = mulaiBekerja;
         this.selesaiBekerja = selesaiBekerja;
+    }
+
+    public Pengalaman(String deskripsi, String perusahaan, String posisi, Date mulaiBekerja, Date selesaiBekerja, UserProfile userProfileId) {
+        this.deskripsi = deskripsi;
+        this.perusahaan = perusahaan;
+        this.posisi = posisi;
+        this.mulaiBekerja = mulaiBekerja;
+        this.selesaiBekerja = selesaiBekerja;
+        this.userProfileId = userProfileId;
     }
 
     public Integer getId() {
@@ -100,11 +109,11 @@ public class Pengalaman implements Serializable {
         this.deskripsi = deskripsi;
     }
 
-    public int getPerusahaan() {
+    public String getPerusahaan() {
         return perusahaan;
     }
 
-    public void setPerusahaan(int perusahaan) {
+    public void setPerusahaan(String perusahaan) {
         this.perusahaan = perusahaan;
     }
 
