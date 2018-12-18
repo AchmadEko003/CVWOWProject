@@ -17,8 +17,6 @@ import org.hibernate.SessionFactory;
 
 /**
  *
- * @author Nitani
- */
 public class PendidikanController implements PendidikanInterface{
     
     private SessionFactory factory;
@@ -44,6 +42,20 @@ public class PendidikanController implements PendidikanInterface{
         boolean hasil = false;
         try {
             RiwayatPendidikan use = new RiwayatPendidikan(instansi, Integer.valueOf(ipk), new Jurusan(Integer.valueOf(jurusanId)), new Universitas(Integer.valueOf(universitasId)), new UserProfile(Integer.valueOf(userProfileId)));
+        this.daoid = new GeneralDAO(factory);
+    }
+    
+    @Override
+    public List<Object> search(String keyword) {
+        return daoid.doDatasId(new RiwayatPendidikan(), keyword);
+    }
+
+    @Override
+    public boolean insert(String id, String judul, String deskripsi, String requirements, String tanggal, String tanggalSelesai, String userId) {
+        boolean hasil = false;
+        Double ipkNew = Double.valueOf(ipk);
+        try {
+            RiwayatPendidikan use = new RiwayatPendidikan(Integer.valueOf(id), nama, jurusan, organisasi, new UserProfile(Integer.valueOf(userProfileId)));
             if (daoid.doDML(use, false)) {
                 hasil = true;
             }
@@ -52,7 +64,6 @@ public class PendidikanController implements PendidikanInterface{
         }
         return hasil;
     }
-
     @Override
     public List<Object> getAll(String keyword) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
