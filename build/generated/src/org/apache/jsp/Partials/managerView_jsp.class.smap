@@ -1,0 +1,16 @@
+SMAP
+managerView_jsp.java
+JSP
+*S JSP
+*F
++ 0 managerView.jsp
+Partials/managerView.jsp
+*L
+5,45:51
+49,6:96
+54,2:102
+56,3:104,3
+59,3:113
+62,2:117
+63,9:119
+*E

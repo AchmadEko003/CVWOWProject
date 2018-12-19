@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/addBahasaServlet.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/index.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/addKealhianServlet.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/controllers/PendidikanController.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/User/cvView.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/addPengalamanServlet.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/LoginServlet.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/controllers/UserProfileController.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/tools/test.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/applyLokerServlet.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/Admin/lowonganFormView.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/controllers/BahasaLangController.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/controllers/LokerController.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/addProfileServlet.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/User/riwayatPendidikanView.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/addPendidikan.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/User/pengalamanView.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/controllers/ApplyController.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/User/userProfileViews.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/User/keahlianView.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/tambahLowonganServlet.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/servlet/RegisterServlet.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/src/java/entities/BahasaLang.java</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/lokerViews.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/User/sertifikatView.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/User/bahasaView.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/User/projectView.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/home.jsp</file>
+            <file>file:/C:/Users/Igaz/Documents/NetBeansProjects/clone%202/CVWOW-Login/web/Partials/Admin/adminView.jsp</file>
+        </group>
+    </open-files>
+</project-private>

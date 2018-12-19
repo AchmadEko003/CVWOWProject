@@ -1,0 +1,10 @@
+SMAP
+userProfileViews_jsp.java
+JSP
+*S JSP
+*F
++ 0 userProfileViews.jsp
+Partials/User/userProfileViews.jsp
+*L
+5,66:44
+*E

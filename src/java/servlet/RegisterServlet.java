@@ -48,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
             getLoginData ld = new getLoginData(SessionFactory);
             UserInterface i = new UserController(SessionFactory);
-            m.Send(emails, usersName);
+//            m.Send(emails, usersName);
             out.print(i);
             out.print(emails);
             out.print(usersName);

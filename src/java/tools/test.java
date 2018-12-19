@@ -17,6 +17,7 @@ import controllers.SertifikatController;
 import controllers.UniversitasController;
 import controllers.UserController;
 import controllers.UserProfileController;
+import entities.Jurusan;
 import entities.LowonganPekerjaan;
 import entities.User;
 import interfaces.ApplyInterface;
@@ -53,7 +54,7 @@ public class test {
         UniversitasInterface universitasInterface = new UniversitasController(factory);
         JurusanInterface ji = new JurusanController(factory);
         BahasaLangInterface bli = new BahasaLangController(factory);
-        System.out.println(bli.insert("9", "1"));
+//        System.out.println(bli.insert("9", "1"));
 //        System.out.println(ji.getById("TEKNIK ELEKTRO"));
 //        System.out.println(universitasInterface.getById("UNIVERSITAS MUHAMMADIYAH MALANG"));
 //        System.out.println(pendidikanInterface.insert("daw", "3", "2", "1", "7"));
@@ -67,12 +68,18 @@ public class test {
 //        System.out.println(li.insert("Daw", "da", "2018-12-17", "1", "7"));
 //        System.out.println(pi.insert("eko", "ko", "Selesai", "7"));
 //        System.out.println(peng.insert("test", "MII", "A", "2018-12-17", "2018-12-17", "7"));
-        System.out.println(ki.insert("a", "v", "9"));
+//        System.out.println(ki.insert("a", "v", "9"));
 //        System.out.println(pi.search("a"));
 //        System.out.println(ui.search("1"));
 //            for (Object emp2 : emp.search("")) {
 //                Regions en = (Regions) emp2;
 //                System.out.println(en.getRegionName());
-//    }
+////    }
+        
+        for (Object object : ji.search("")) {
+            Jurusan j = (Jurusan) object;
+            System.out.println(j.getNama());
+        }
+
     }
 }
