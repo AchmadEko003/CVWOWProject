@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "LowonganPekerjaan.findById", query = "SELECT l FROM LowonganPekerjaan l WHERE l.id = :id")
     , @NamedQuery(name = "LowonganPekerjaan.findByJudul", query = "SELECT l FROM LowonganPekerjaan l WHERE l.judul = :judul")
     , @NamedQuery(name = "LowonganPekerjaan.findByTanggalMulai", query = "SELECT l FROM LowonganPekerjaan l WHERE l.tanggalMulai = :tanggalMulai")
-    , @NamedQuery(name = "LowonganPekerjaan.findByTanggalSelesai", query = "SELECT l FROM LowonganPekerjaan l WHERE l.tanggalSelesai = :tanggalSelesai")})
+    , @NamedQuery(name = "LowonganPekerjaan.findByTanggalSelesai", query = "SELECT l FROM LowonganPekerjaan l WHERE l.tanggalSelesai = :tanggalSelesai")
+    , @NamedQuery(name = "LowonganPekerjaan.findByIsdelete", query = "SELECT l FROM LowonganPekerjaan l WHERE l.isdelete = :isdelete")})
 public class LowonganPekerjaan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,6 +61,9 @@ public class LowonganPekerjaan implements Serializable {
     @Column(name = "TANGGAL_SELESAI")
     @Temporal(TemporalType.DATE)
     private Date tanggalSelesai;
+    @Basic(optional = false)
+    @Column(name = "ISDELETE")
+    private int isdelete;
     @JoinColumn(name = "REQUIREMENTS_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Requirements requirementsId;
@@ -74,29 +78,34 @@ public class LowonganPekerjaan implements Serializable {
         this.id = id;
     }
 
-    public LowonganPekerjaan(Integer id, String judul, String deskripsi, Date tanggalMulai, Date tanggalSelesai) {
+    public LowonganPekerjaan(String judul, String deskripsi, Date tanggalMulai, Date tanggalSelesai, int isdelete, Requirements requirementsId, User userId) {
+        this.judul = judul;
+        this.deskripsi = deskripsi;
+        this.tanggalMulai = tanggalMulai;
+        this.tanggalSelesai = tanggalSelesai;
+        this.isdelete = isdelete;
+        this.requirementsId = requirementsId;
+        this.userId = userId;
+    }
+
+    public LowonganPekerjaan(Integer id, String judul, String deskripsi, Date tanggalMulai, Date tanggalSelesai, int isdelete, Requirements requirementsId, User userId) {
         this.id = id;
         this.judul = judul;
         this.deskripsi = deskripsi;
         this.tanggalMulai = tanggalMulai;
         this.tanggalSelesai = tanggalSelesai;
+        this.isdelete = isdelete;
+        this.requirementsId = requirementsId;
+        this.userId = userId;
     }
 
-    public LowonganPekerjaan(String judul, String deskripsi, Date tanggalMulai, Date tanggalSelesai, Requirements requirementsId, User userId) {
+    public LowonganPekerjaan(Integer id, String judul, String deskripsi, Date tanggalMulai, Date tanggalSelesai, int isdelete) {
+        this.id = id;
         this.judul = judul;
         this.deskripsi = deskripsi;
         this.tanggalMulai = tanggalMulai;
         this.tanggalSelesai = tanggalSelesai;
-        this.requirementsId = requirementsId;
-        this.userId = userId;
-    }
-
-    public LowonganPekerjaan(String judul, String deskripsi, Date tanggalSelesai, Requirements requirementsId, User userId) {
-        this.judul = judul;
-        this.deskripsi = deskripsi;
-        this.tanggalSelesai = tanggalSelesai;
-        this.requirementsId = requirementsId;
-        this.userId = userId;
+        this.isdelete = isdelete;
     }
 
     public Integer getId() {
@@ -137,6 +146,14 @@ public class LowonganPekerjaan implements Serializable {
 
     public void setTanggalSelesai(Date tanggalSelesai) {
         this.tanggalSelesai = tanggalSelesai;
+    }
+
+    public int getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(int isdelete) {
+        this.isdelete = isdelete;
     }
 
     public Requirements getRequirementsId() {

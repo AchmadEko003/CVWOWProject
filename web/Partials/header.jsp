@@ -146,6 +146,6 @@
                 </div>
             </div>
         </div>
-        <%@include file="cvView.jsp" %>
+        <%@include file="User/cvView.jsp" %>
     </body>
 </html>

@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "BahasaLang.findAll", query = "SELECT b FROM BahasaLang b")
-    , @NamedQuery(name = "BahasaLang.findById", query = "SELECT b FROM BahasaLang b WHERE b.id = :id")})
+    , @NamedQuery(name = "BahasaLang.findById", query = "SELECT b FROM BahasaLang b WHERE b.id = :id")
+    , @NamedQuery(name = "BahasaLang.findByRate", query = "SELECT b FROM BahasaLang b WHERE b.rate = :rate")})
 public class BahasaLang implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +39,9 @@ public class BahasaLang implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Basic(optional = false)
+    @Column(name = "RATE")
+    private int rate;
     @JoinColumn(name = "ID_BAHASA", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Bahasa idBahasa;
@@ -52,9 +56,15 @@ public class BahasaLang implements Serializable {
         this.id = id;
     }
 
-    public BahasaLang(Bahasa idBahasa, UserProfile idUserProfile) {
+    public BahasaLang(int rate, Bahasa idBahasa, UserProfile idUserProfile) {
+        this.rate = rate;
         this.idBahasa = idBahasa;
         this.idUserProfile = idUserProfile;
+    }
+
+    public BahasaLang(Integer id, int rate) {
+        this.id = id;
+        this.rate = rate;
     }
 
     public Integer getId() {
@@ -63,6 +73,14 @@ public class BahasaLang implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
     public Bahasa getIdBahasa() {

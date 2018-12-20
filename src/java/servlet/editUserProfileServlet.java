@@ -5,25 +5,26 @@
  */
 package servlet;
 
-import controllers.LokerController;
-import interfaces.LokerInterface;
+import controllers.UserProfileController;
+import entities.UserProfile;
+import interfaces.UserProfileInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
 
 /**
  *
  * @author Nitani
  */
-@WebServlet(name = "viewLokerServlet", urlPatterns = {"/viewLokerServlet"})
-public class viewLokerServlet extends HttpServlet {
+@WebServlet(name = "editUserProfileServlet", urlPatterns = {"/editUserProfileServlet"})
+public class editUserProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,12 +38,16 @@ public class viewLokerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String Id = request.getParameter("id");
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
-            LokerInterface li = new LokerController(HibernateUtil.getSessionFactory());
-            List<Object> datas = li.search();
-            session.setAttribute("lokerData", datas);
-            response.sendRedirect("View/viewEmployee.jsp");
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            /* TODO output your page here. You may use following sample code. */
+            UserProfileInterface ui = new UserProfileController(factory);
+            Object r = ui.getIdProfileIdUser(Id);
+            UserProfile up = (UserProfile) r;
+            session.setAttribute("profileUser", up);
+            response.sendRedirect("Partuaks/User/userProfileViews.jsp");
         }
     }
 

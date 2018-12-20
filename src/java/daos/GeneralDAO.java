@@ -78,6 +78,11 @@ public class GeneralDAO implements DAOInterface {
     }
 
     @Override
+    public Object getIdProfileIdUser(Object id) {
+        return this.fdao.getProfileIdUser(id);
+    }
+
+    @Override
     public List<Object> doDatasId(Object table, String keyword) {
         return this.fdao.getDatasId(table, keyword);
     }
@@ -100,5 +105,20 @@ public class GeneralDAO implements DAOInterface {
     @Override
     public Object getAttributBahasa(Object id) {
         return this.fdao.getBahasa(id);
+    }
+
+    @Override
+    public Object getUserApply(Object id) {
+        return this.fdao.getUserApply(id);
+    }
+
+    @Override
+    public List<Object> listLokerIsDelete() {
+        return this.fdao.getLokerIsDelete();
+    }
+
+    @Override
+    public List<Object> getViewUserApply(Object id) {
+        return this.fdao.getViewUserApply(id);
     }
 }

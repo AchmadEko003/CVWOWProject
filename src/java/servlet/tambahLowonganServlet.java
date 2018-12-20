@@ -6,8 +6,11 @@
 package servlet;
 
 import controllers.LokerController;
+import controllers.ReqController;
 import entities.User;
+import entities.Requirements;
 import interfaces.LokerInterface;
+import interfaces.ReqInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -46,12 +49,14 @@ public class tambahLowonganServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             SessionFactory sessionFactory = new HibernateUtil().getSessionFactory();
             LokerInterface i = new LokerController(sessionFactory);
+            ReqInterface ri = new ReqController(sessionFactory);
+            Requirements rq = (Requirements) ri.getById(req);
             out.print(juduls);
             out.print(des);
-            out.print(req);
+            out.print(rq.getId());
             out.print(tglSel);
             User r = (User) session.getAttribute("userData");
-            if (i.insert(juduls, des, tglSel, req, r.getId().toString())) {
+            if (i.insert(juduls, des, tglSel, rq.getId().toString(), r.getId().toString())) {
                 response.sendRedirect("index.jsp");
             }
         }

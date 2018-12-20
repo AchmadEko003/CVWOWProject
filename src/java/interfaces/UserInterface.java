@@ -15,6 +15,8 @@ public interface UserInterface {
 
     public List<Object> search(String keyword);
 
+    public List<Object> getAttributApplyUser(String keyword);
+
     public boolean register(String nama, String email, String password);
 
     public boolean login(Object nama, String password);

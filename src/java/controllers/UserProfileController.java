@@ -51,8 +51,18 @@ public class UserProfileController implements UserProfileInterface {
             byte[] a = foto.getBytes();
             byte[] b = cv.getBytes();
             byte[] c = ktp.getBytes();
-            UserProfile use = new UserProfile(nama, Integer.valueOf(umur), alamat, dates, Integer.valueOf(noTelpon), a, b, c, new User(Integer.valueOf(userId)));
-            if (daoid.doDML(use, false)) {
+//            UserProfile up = new UserProfile(Integer.valueOf(""), nama, Integer.valueOf(umur), alamat, dates, Integer.valueOf(noTelpon), a, b, c);
+            System.out.println(nama);
+            System.out.println(umur);
+            System.out.println(alamat);
+            System.out.println(tanggalLahir);
+            System.out.println(noTelpon);
+            System.out.println(foto);
+            System.out.println(cv);
+            System.out.println(ktp);
+            System.out.println(userId);
+            UserProfile up = new UserProfile(nama, Integer.valueOf(umur), alamat, dates, Integer.valueOf(noTelpon), a, b, c, new User(Integer.valueOf(userId)));
+            if (daoid.doDML(up, false)) {
                 hasil = true;
             }
         } catch (Exception e) {
@@ -64,5 +74,10 @@ public class UserProfileController implements UserProfileInterface {
     @Override
     public Object getById(Object id) {
         return this.daoid.getIdProfile(id);
+    }
+
+    @Override
+    public Object getIdProfileIdUser(Object id) {
+        return this.daoid.getIdProfileIdUser(id);
     }
 }

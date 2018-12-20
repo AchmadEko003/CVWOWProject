@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import entities.LowonganPekerjaan;
 import java.util.List;
 
 /**
@@ -13,9 +14,11 @@ import java.util.List;
  */
 public interface LokerInterface {
 
-    public List<Object> search(String keyword);
+    public List<Object> search();
 
     public boolean insert(String judul, String deskripsi, String tanggalSelesai, String requirementsId, String userId);
 
     public Object getByIds(Object id);
+    
+    public boolean delete(LowonganPekerjaan lp);
 }

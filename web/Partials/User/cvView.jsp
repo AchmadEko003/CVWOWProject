@@ -4,6 +4,9 @@
     Author     : Nitani
 --%>
 
+<%@page import="entities.BahasaLang"%>
+<%@page import="controllers.BahasaLangController"%>
+<%@page import="interfaces.BahasaLangInterface"%>
 <%@page import="entities.Project"%>
 <%@page import="controllers.ProjectController"%>
 <%@page import="interfaces.ProjectInterface"%>
@@ -64,6 +67,22 @@
                 });
             });
         </script>
+        
+        //Give rating
+        <script>
+            $(function () {
+                var current_progress = document.getElementById("myText").value;
+                var interval = setInterval(function () {
+//                    current_progress += 10;
+                    $("#rating")
+                            .css("width", current_progress + "%")
+                            .attr("aria-valuenow", current_progress)
+                            .text(current_progress);
+                    if (current_progress >= 100)
+                        clearInterval(interval);
+                }, 1000);
+            });
+        </script>
     </head>
     <body  id="target">
         <% String namas = "", umurs = "", alamats = "", tglLahirs = "", telps = "";
@@ -86,10 +105,10 @@
                         <div class="card-body">
                             <h4 class="card-title">Hi , saya <%= namas%></h4>
                             <footer class="blockquote-footer"><a href="#" data-toggle="modal" data-target="#userModal">Edit profile</a></footer>
-                            <p class="mb-1"><%= umurs%></p>
-                            <p class="mb-1"><%= tglLahirs%></p>
-                            <p class="mb-1"><%= telps%></p>
-                            <p><%= alamats%></p>
+                            <p class="mb-1"><i class="fas fa-baby"></i> <%= umurs%> Tahun</p>
+                            <p class="mb-1"><i class="fas fa-calendar-day"></i> <%= tglLahirs%></p>
+                            <p class="mb-1"><i class="fas fa-phone-square"></i> <%= telps%></p>
+                            <p><i class="fas fa-address-card"></i> <%= alamats%></p>
                         </div>
                         <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -102,14 +121,22 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <h5><i class="fas fa-language"></i> Bahasa</h5><br>
-                                <p>Ini isinya</p>
+                                <h5><i class="fas fa-language"></i> Bahasa</h5>
+                                <% BahasaLangInterface bhsl = new BahasaLangController(factorys);
+                                    for (Object bahas : bhsl.search(r.getId().toString())) {
+                                        BahasaLang bhs = (BahasaLang) bahas;%>
+                                <p><%= bhs.getIdBahasa().getNama()%></p>
+                                <input type="hidden" id="myText" value="<%= bhs.getRate()%>">
+                                <div class="progress">
+                                    <div id="rating" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <% } %>
                             </li>
                             <li class="list-group-item">
-                                <h5><i class="fas fa-award"></i> Sertifikat</h5><br>
+                                <h5><i class="fas fa-award"></i> Sertifikat</h5>
                                 <% SertifikatInterface sis = new SertifikatController(factorys);
                                     for (Object serti : sis.search(r.getId().toString())) {
-                                        Sertifikat sert = (Sertifikat) serti; %>
+                                        Sertifikat sert = (Sertifikat) serti;%>
                                 <p class="mb-1"> <%= sert.getNama()%> </p>
                                 <footer class="blockquote-footer"><%= sert.getLembaga()%></footer>
                                     <% } %>
@@ -157,11 +184,11 @@
                                 for (Object keahlian : ki.search(r.getId().toString())) {
                                     Keahlian keh = (Keahlian) keahlian;%>
                             <h5><%= keh.getNama()%></h5>
-                            <p class="blockquote-footer"> <%= keh.getDeskripsi()%> </p>
+                            <p> <%= keh.getDeskripsi()%> </p>
                             <% }%>
                         </div>
                     </div>
-                    <div class="card shadow p-3 mb-5 bg-white rounded" style="margin-top: 10px;">
+                    <div class="card shadow p-3 bg-white rounded" style="margin-top: 10px; margin-bottom: 80px">
                         <div class="card-header">
                             <h3><i class="fas fa-tasks"></i> Project</h3>
                         </div>
@@ -177,5 +204,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>

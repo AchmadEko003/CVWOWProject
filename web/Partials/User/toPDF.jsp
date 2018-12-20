@@ -69,7 +69,7 @@
             });
         </script>
 
-        
+
     </head>
     <body id="target">
         <% String namas = "", umurs = "", alamats = "", tglLahirs = "", telps = "";
@@ -85,53 +85,148 @@
         %>
         <div id="content">
             <h3>Hello, this is <%= namas%> (<%= umurs%>)</h3>
-
-            <h5><i class="fas fa-award"></i> Sertifikat</h5><br>
-            <% SertifikatInterface sis = new SertifikatController(factorys);
-                for (Object serti : sis.search(r.getId().toString())) {
-                    Sertifikat sert = (Sertifikat) serti;%>
-            <p class="mb-1"> <%= sert.getNama()%> </p>
-            <footer class="blockquote-footer"><%= sert.getLembaga()%></footer>
-            <% } %><hr>
-            <h5><i class="fas fa-graduation-cap"></i> Pendidikan</h5>
-            <div class="card-body">
-                <% PendidikanInterface pni = new PendidikanController(factorys);
-                    for (Object pendi : pni.search(r.getId().toString())) {
-                        RiwayatPendidikan pe = (RiwayatPendidikan) pendi;%>
-                <h5> <%= pe.getUniversitasId().getNama()%></h5>
-                <p class="blockquote-footer"> <%= pe.getJurusanId().getNama()%> | <%= pe.getIpk()%></p>
-                <% } %>
-            </div><hr
-
-                <h5><i class="fas fa-briefcase"></i> Pengalaman</h5>
-            <% PengalamanInterface pi = new PengalamanController(factorys);
-                for (Object pengalaman : pi.search(r.getId().toString())) {
-                    Pengalaman peng = (Pengalaman) pengalaman;%>
-            <h5> <%= peng.getPerusahaan()%> (<%= peng.getPosisi()%>)</h5>
-            <p> <%= peng.getDeskripsi()%> </p>
-            <footer class="blockquote-footer"> <%= peng.getMulaiBekerja()%> sampai <%= peng.getSelesaiBekerja()%></footer>
-            <% } %><hr>
-
-            <h5><i class="fas fa-sliders-h"></i> Keahlian</h5>
-            <% KeahlianInterface ki = new KeahlianController(factorys);
-                for (Object keahlian : ki.search(r.getId().toString())) {
-                    Keahlian keh = (Keahlian) keahlian;%>
-            <h5><%= keh.getNama()%></h5>
-            <p class="blockquote-footer"> <%= keh.getDeskripsi()%> </p>
-            <% }%><hr>
-
-            <h5><i class="fas fa-tasks"></i> Project</h5>
-            <% ProjectInterface proi = new ProjectController(factorys);
-                for (Object o : proi.search(r.getId().toString())) {
-                    Project pro = (Project) o;%>
-            <h5 class="card-title"><%= pro.getNama()%> (<%= pro.getStatus()%>)</h5>
-            <p class="card-text"><%= pro.getDeskripsi()%></p>
-            <% }%>
-
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <button id="cmd">generate PDF</button>
-        <button onclick="sweet()">wahaha</button>
-<script>
+        <button id="cmd">wahaha</button>
+        <script>
             function sweet() {
                 swal("Good job!", "You clicked the button!", "success");
             }

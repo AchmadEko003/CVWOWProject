@@ -66,4 +66,9 @@ public class UserController implements UserInterface {
         return this.daoid.getById(new User(), id);
     }
 
+    @Override
+    public List<Object> getAttributApplyUser(String keyword) {
+        return this.daoid.getViewUserApply(keyword);
+    }
+
 }

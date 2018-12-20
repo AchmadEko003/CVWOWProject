@@ -42,7 +42,8 @@ public class BahasaLangController implements BahasaLangInterface {
     public boolean insert(String user, String bahasa) {
         boolean hasil = false;
         try {
-            BahasaLang use = new BahasaLang(new Bahasa(Integer.valueOf(bahasa)), new UserProfile(Integer.valueOf(user)));
+            BahasaLang use = new BahasaLang(0,new Bahasa(Integer.valueOf(bahasa)), new UserProfile(Integer.valueOf(user)));
+            System.out.println(use.getIdBahasa().toString() + use.getIdUserProfile().toString());
             if (daoid.doDML(use, false)) {
                 hasil = true;
             }

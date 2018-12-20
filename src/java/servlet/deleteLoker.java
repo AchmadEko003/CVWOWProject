@@ -6,24 +6,29 @@
 package servlet;
 
 import controllers.LokerController;
+import controllers.ReqController;
+import entities.LowonganPekerjaan;
+import entities.Requirements;
+import entities.User;
 import interfaces.LokerInterface;
+import interfaces.ReqInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
 
 /**
  *
  * @author Nitani
  */
-@WebServlet(name = "viewLokerServlet", urlPatterns = {"/viewLokerServlet"})
-public class viewLokerServlet extends HttpServlet {
+@WebServlet(name = "deleteLoker", urlPatterns = {"/deleteLoker"})
+public class deleteLoker extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,13 +41,25 @@ public class viewLokerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        String id = request.getParameter("id");
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
-            LokerInterface li = new LokerController(HibernateUtil.getSessionFactory());
-            List<Object> datas = li.search();
-            session.setAttribute("lokerData", datas);
-            response.sendRedirect("View/viewEmployee.jsp");
+            SessionFactory sessionFactory = new HibernateUtil().getSessionFactory();
+            LokerInterface i = new LokerController(sessionFactory);
+            LowonganPekerjaan lp = (LowonganPekerjaan) i.getByIds(8);
+            ReqInterface ri = new ReqController(sessionFactory);
+            User r = (User) session.getAttribute("userData");
+            out.println(lp.getId());
+            out.println(lp.getJudul());
+            out.println(lp.getDeskripsi());
+            out.println(lp.getTanggalMulai());
+            out.println(lp.getTanggalSelesai().toString());
+            out.println(lp.getRequirementsId().toString());
+            out.println(lp.getUserId());
+
+            if (i.delete(lp)) {
+                response.sendRedirect("index.jsp");
+            }
         }
     }
 

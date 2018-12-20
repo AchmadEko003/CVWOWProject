@@ -50,7 +50,7 @@ public class addBahasaServlet extends HttpServlet {
             Bahasa b = (Bahasa) i.getById(nama);
             out.print(b.getId());
             out.print(nama);
-            if (i.insert(b.getId().toString(), r.getId().toString())); {
+            if (i.insert(r.getId().toString(), b.getId().toString())); {
                 response.sendRedirect("index.jsp");
             }
         }

@@ -28,14 +28,14 @@
     </head>
     <body class="bg-light">
         
-        <div class="container">
+        <div class="container" style="margin-bottom: 70px">
             <div class="row">
 
-                <div class="col-sm-9">
+                <div>
                     <% SessionFactory factory = HibernateUtil.getSessionFactory();
                         LokerInterface li = new LokerController(factory);
                         DateFormat formats = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
-                        for (Object loker : li.search("")) {
+                        for (Object loker : li.search()) {
                             LowonganPekerjaan lowker = (LowonganPekerjaan) loker;
                             Date hire = lowker.getTanggalSelesai();%>
                     <div class="card shadow p-3 mb-3 bg-white rounded" style="margin-top: 10px;">
@@ -46,22 +46,10 @@
                             <h5 class="card-title">Mitra Integrasi Informatika</h5>
                             <p class="card-text"><%= lowker.getDeskripsi()%></p>
                             <footer class="blockquote-footer">Waktu berahir <cite title="Source Title"><%= formats.format((hire))%></cite></footer>
-                            <a href="../applyLokerServlet?id=<%= lowker.getId()%>" class="card-link" data-toggle="modal" data-target="#cvModal">Apply</a>
                         </div>
                     </div>
                     <% }%>
                 </div>
-
-                <!-- Modal Keahlian -->
-                <!--                <div class="modal fade" id="cvModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                <%--<%@include file="Partials/User/applyView.jsp" %>--%>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>-->
             </div>
         </div>
     </body>

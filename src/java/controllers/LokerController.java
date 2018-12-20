@@ -40,8 +40,8 @@ public class LokerController implements LokerInterface {
     }
 
     @Override
-    public List<Object> search(String keyword) {
-        return this.daoid.doDDL(new LowonganPekerjaan(), keyword);
+    public List<Object> search() {
+        return this.daoid.listLokerIsDelete();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class LokerController implements LokerInterface {
             String tglMulai = dtf.format(localDate);
             Date mulai = format.parse(tglMulai);
             System.out.println(mulai);
-            LowonganPekerjaan use = new LowonganPekerjaan(judul, deskripsi, mulai, dates, new Requirements(Integer.valueOf(requirementsId)), new User(Integer.valueOf(userId)));
+            LowonganPekerjaan use = new LowonganPekerjaan(judul, deskripsi, mulai, dates, 1, new Requirements(Integer.valueOf(requirementsId)), new User(Integer.valueOf(userId)));
             if (daoid.doDML(use, false)) {
                 hasil = true;
             }
@@ -70,6 +70,21 @@ public class LokerController implements LokerInterface {
     @Override
     public Object getByIds(Object id) {
         return this.daoid.getLoker(id);
+    }
+
+    @Override
+    public boolean delete(LowonganPekerjaan lp) {
+        boolean hasil = false;
+        try {
+            lp.setIsdelete(0);
+            if (daoid.doDML(lp, false)) {
+                hasil = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return hasil;
     }
 
 }

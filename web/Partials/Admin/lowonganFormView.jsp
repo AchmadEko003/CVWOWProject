@@ -4,6 +4,11 @@
     Author     : Nitani
 --%>
 
+<%@page import="org.hibernate.SessionFactory"%>
+<%@page import="tools.HibernateUtil"%>
+<%@page import="controllers.ReqController"%>
+<%@page import="interfaces.ReqInterface"%>
+<%@page import="entities.Requirements"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,30 +17,33 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <% SessionFactory reqFactory = HibernateUtil.getSessionFactory(); %>
         <div class="container">
-            <form method="POST" action="../../tambahLowonganServlet">
+            <form method="POST" action="tambahLowonganServlet">
                 <div class="form-group">
-                    <i class="fas fa-user"></i>
-                    <label for="exampleInputEmail1">Judul</label>
-                    <input name="judul" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="name" placeholder="Name">
+                    <label>Judul</label>
+                    <input name="judul" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="name" placeholder="Judul">
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
-                    <label for="exampleInputPassword1">Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control" id="exampleInputPassword1" placeholder="Password"></textarea>
+                    <label>Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control" id="exampleInputPassword1" placeholder="Deskripsi"></textarea>
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
-                    <label for="exampleInputPassword1">Requirements</label>
-                    <input name="req" type="text" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                    <label>Requirements</label>
+                    <select name="req" class="form-control">
+                        <%  ReqInterface reqs = new ReqController(reqFactory);
+                            for (Object object : reqs.search("")) {
+                                Requirements rq = (Requirements) object;%>
+                        <option><%= rq.getNama() %></option>
+                        <% }%>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <i class="fas fa-lock"></i>
                     <label for="exampleInputPassword1">Tanggal Selesai</label>
-                    <input name="tglSelesai" type="date" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                    <input name="tglSelesai" type="date" class="form-control" id="exampleInputPassword1">
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-info btn-lg btn-block">Tambah <i class="fab fa-telegram-plane"></i>
+                    <input type="submit" class="btn btn-info btn-lg btn-block" value="Submit">
                 </div>
             </form>
         </div>

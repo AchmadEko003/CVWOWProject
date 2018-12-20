@@ -4,6 +4,7 @@
     Author     : Nitani
 --%>
 
+<%@page import="entities.UserProfile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,37 +19,53 @@
 
     </head>
     <body>
+        <%
+            String namaa = "";
+            String umur = "";
+            String alamat = "";
+            String ttl = "";
+            String telp = "";
+            String countryId = "";
+            if (session.getAttribute("profileUser") != null) {
+                UserProfile l = (UserProfile) session.getAttribute("profileUser");
+                namaa = l.getNama();
+                umur = String.valueOf(l.getUmur());
+                alamat = l.getAlamat();
+                ttl = l.getTanggalLahir().toString();
+                telp = String.valueOf(l.getNoTelpon());
+            }
+        %>
         <div class="container">
             <form method="POST" action="addProfileServlet">
                 <div class="form-group">
                     <!--<i class="fas fa-user"></i>-->
                     <label for="exampleInputEmail1">Name</label>
-                    <input name="nama" type="text" class="form-control" aria-describedby="name" placeholder="Name">
+                    <input name="nama" type="text" class="form-control" aria-describedby="name" placeholder="Nama">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-envelope"></i>-->
                     <label for="exampleInputEmail1">Umur</label>
-                    <input name="umur" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input name="umur" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Umur">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">alamat</label>
-                    <textarea name="alamat" class="form-control" placeholder="Password"></textarea>
+                    <textarea name="alamat" class="form-control" placeholder="Alamat"></textarea>
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">Tanggal lahir</label>
-                    <input name="tglLahir" type="date" class="form-control" placeholder="Confirm Password">
+                    <input name="tglLahir" type="date" class="form-control">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">No Telp</label>
-                    <input name="telp" type="text" class="form-control" placeholder="Confirm Password">
+                    <input name="telp" type="text" class="form-control" placeholder="Nomor Telepon">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">Foto</label>
-                    <input name="foto" type="file" class="form-control-file"  aria-describedby="fileHelp">
+                    <input name="foto" type="file" maxlength="100" class="form-control-file"  aria-describedby="fileHelp">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->

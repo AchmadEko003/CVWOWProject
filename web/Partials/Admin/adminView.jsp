@@ -40,6 +40,7 @@
                             <th scope="col">Requirements</th>
                             <th scope="col">Tanggal Mulai</th>
                             <th scope="col">Tanggal Selesai</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +48,7 @@
                             <%  SessionFactory factorys = HibernateUtil.getSessionFactory();
                                 LokerInterface sis = new LokerController(factorys);
                                 DateFormat formats = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
-                                for (Object serti : sis.search("")) {
+                                for (Object serti : sis.search()) {
                                     LowonganPekerjaan sert = (LowonganPekerjaan) serti;
                                     Date hire = sert.getTanggalMulai();
                                     Date selesai = sert.getTanggalSelesai();%>
@@ -58,6 +59,13 @@
                             <td><%= sert.getRequirementsId().getNama()%></td>
                             <td><%= formats.format(hire)%></td>
                             <td><%= formats.format(selesai)%></td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary">
+                                        <a href="deleteLoker?id=<%= sert.getId() %>" type="btn" class="text-white">Delete</a>
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         <% }%>
                     </tbody>

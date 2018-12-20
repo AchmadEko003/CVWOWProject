@@ -39,12 +39,12 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
+                    <li class="nav-item disabled">
                         <a class="nav-link" href="Partials/lokerViews.jsp">Lowongan Kerja</a>
                     </li>
                     <li class="nav-item active">
                         <div class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Home</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Tambah CV</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#keahlianModal">Keahlian</a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sertifikatModal">Sertifikat</a>
@@ -126,29 +126,29 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <%@include file="Partials/User/bahasaView.jsp" %>
+                        <%@include file="User/bahasaView.jsp" %>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container">
+        <div class="container" style="margin-bottom: 60px">
             <div class="row">
 
-                <div class="col-sm-9">
+                <div>
                     <% SessionFactory factory = HibernateUtil.getSessionFactory();
                         LokerInterface li = new LokerController(factory);
                         DateFormat formats = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
-                        for (Object loker : li.search("")) {
+                        for (Object loker : li.search()) {
                             LowonganPekerjaan lowker = (LowonganPekerjaan) loker;
                             Date hire = lowker.getTanggalSelesai();%>
                     <div class="card shadow p-3 mb-3 bg-white rounded" style="margin-top: 10px;">
                         <div class="card-header">
-                            <h3><%= lowker.getJudul()%></h3>
+                            <h3><%= lowker.getJudul()%> (<%= lowker.getRequirementsId().getNama() %>)</h3>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Mitra Integrasi Informatika</h5>
-                            <p class="card-text"><%= lowker.getDeskripsi()%></p>
+                            <p class="card-text"><%= lowker.getDeskripsi()%> </p>
                             <footer class="blockquote-footer">Waktu berahir <cite title="Source Title"><%= formats.format((hire))%></cite></footer>
                             <a href="../applyLokerServlet?id=<%= lowker.getId()%>" class="card-link" onclick="return confirm('Ingin melamar di lowongan ini?');">Apply</a>
                         </div>

@@ -18,4 +18,6 @@ public interface UserProfileInterface {
     public boolean inputData(String nama, String umur, String alamat, String tanggalLahir, String noTelpon, String foto, String cv, String ktp, String userId);
 
     public Object getById(Object id);
+    
+    public Object getIdProfileIdUser(Object id);
 }

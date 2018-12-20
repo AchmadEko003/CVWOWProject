@@ -18,6 +18,33 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            function deletes() {
+                swal({
+                    title: "Ingin logout?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal("Berhasil logout", {
+                                    icon: "success",
+                                });
+                                window.location.href = "logoutServlet";
+                            }
+                        });
+            }
+
+            function logins() {
+                swal({
+                    title: "Berhasil login",
+                    icon: "success",
+                    buttons: true,
+                })
+                window.location.href = "loginServlet";
+            }
+        </script>
     </head>
     <body class="bg-light">
         <% String idUser = "", emails = "", role = "", decodedUrl = "";
@@ -40,11 +67,11 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <% if(role.equals("user")) { %>
+                    <% if (role.equals("user")) { %>
                     <li class="nav-item active">
                         <a class="nav-link" href="Partials/lokerViews.jsp">Lowongan Kerja</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown">Tambah CV</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -58,10 +85,10 @@
                         </div>
                     </li>
                     <% } %>
-                    <% if(role.equals("admin")) { %>
+                    
+                    <% if (role.equals("admin")) { %>
                     <li class="nav-item active">
-                        <a class="nav-link" href="Partials/Admin/tambahLowonganView.jsp">Tambah Lowongan</a>
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#lowonganModal">Tambah Lowongans</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#lowonganModal">Tambah Lowongan</a>
                     </li>
                     <% } %>
                 </ul>
@@ -214,10 +241,22 @@
             </div>
         </div>
 
+        <!-- Modal Tambah Lowongan -->
+        <div class="modal fade" id="lowonganModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <%@include file="Partials/Admin/lowonganFormView.jsp" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div>
             <% if (role.equals("user")) {%>
             <%@include file="Partials/User/cvView.jsp" %>
-            <% } else if (role.equals("admin")) { %>
+            <% } else if (role.equals("admin")) {
+            %>
             <%@include file="Partials/Admin/adminView.jsp" %>
             <% }%>
         </div>
@@ -229,33 +268,5 @@
                 </div>
             </nav>
         </footer>
-
-        <script>
-            function deletes() {
-                swal({
-                    title: "Ingin logout?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                        .then((willDelete) => {
-                            if (willDelete) {
-                                swal("Berhasil logout", {
-                                    icon: "success",
-                                });
-                                window.location.href = "logoutServlet";
-                            }
-                        });
-            }
-
-            function logins() {
-                swal({
-                    title: "Berhasil login",
-                    icon: "success",
-                    buttons: true,
-                })
-                window.location.href = "loginServlet";
-            }
-        </script>
     </body>
 </html>

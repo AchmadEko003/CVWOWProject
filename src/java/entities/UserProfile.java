@@ -56,8 +56,8 @@ public class UserProfile implements Serializable {
     @Lob
     @Column(name = "KTP")
     private byte[] ktp;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userProfileId", fetch = FetchType.LAZY)
-    private List<RiwayatPendidikan> riwayatPendidikanList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUserProfile", fetch = FetchType.LAZY)
+    private List<BahasaLang> bahasaLangList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -82,8 +82,6 @@ public class UserProfile implements Serializable {
     @Basic(optional = false)
     @Column(name = "NO_TELPON")
     private int noTelpon;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUserProfile", fetch = FetchType.LAZY)
-    private List<BahasaLang> bahasaLangList;
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
@@ -93,18 +91,6 @@ public class UserProfile implements Serializable {
 
     public UserProfile(Integer id) {
         this.id = id;
-    }
-
-    public UserProfile(Integer id, String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp) {
-        this.id = id;
-        this.nama = nama;
-        this.umur = umur;
-        this.alamat = alamat;
-        this.tanggalLahir = tanggalLahir;
-        this.noTelpon = noTelpon;
-        this.foto = foto;
-        this.cv = cv;
-        this.ktp = ktp;
     }
 
     public UserProfile(String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp, User userId) {
@@ -117,6 +103,18 @@ public class UserProfile implements Serializable {
         this.cv = cv;
         this.ktp = ktp;
         this.userId = userId;
+    }
+
+    public UserProfile(Integer id, String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp) {
+        this.id = id;
+        this.nama = nama;
+        this.umur = umur;
+        this.alamat = alamat;
+        this.tanggalLahir = tanggalLahir;
+        this.noTelpon = noTelpon;
+        this.foto = foto;
+        this.cv = cv;
+        this.ktp = ktp;
     }
 
     public Integer getId() {
@@ -168,15 +166,6 @@ public class UserProfile implements Serializable {
     }
 
 
-    @XmlTransient
-    public List<BahasaLang> getBahasaLangList() {
-        return bahasaLangList;
-    }
-
-    public void setBahasaLangList(List<BahasaLang> bahasaLangList) {
-        this.bahasaLangList = bahasaLangList;
-    }
-
     public User getUserId() {
         return userId;
     }
@@ -210,16 +199,6 @@ public class UserProfile implements Serializable {
         return "entities.UserProfile[ id=" + id + " ]";
     }
 
-
-    @XmlTransient
-    public List<RiwayatPendidikan> getRiwayatPendidikanList() {
-        return riwayatPendidikanList;
-    }
-
-    public void setRiwayatPendidikanList(List<RiwayatPendidikan> riwayatPendidikanList) {
-        this.riwayatPendidikanList = riwayatPendidikanList;
-    }
-
     public byte[] getFoto() {
         return foto;
     }
@@ -242,6 +221,15 @@ public class UserProfile implements Serializable {
 
     public void setKtp(byte[] ktp) {
         this.ktp = ktp;
+    }
+
+    @XmlTransient
+    public List<BahasaLang> getBahasaLangList() {
+        return bahasaLangList;
+    }
+
+    public void setBahasaLangList(List<BahasaLang> bahasaLangList) {
+        this.bahasaLangList = bahasaLangList;
     }
     
 }

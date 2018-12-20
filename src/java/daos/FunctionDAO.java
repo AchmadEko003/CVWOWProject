@@ -43,7 +43,7 @@ public class FunctionDAO {
     }
 
     /**
-     * Fungsi untuk melakukan insert atau update Region
+     * Fungsi untuk melakukan insert atau update
      *
      * @param region
      * @param isDelete
@@ -217,6 +217,26 @@ public class FunctionDAO {
         }
         return object;
     }
+
+    public UserProfile getProfileIdUser(Object user) {
+        UserProfile object = null;
+        String query = "from UserProfile where ID= " + user;
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            object = (UserProfile) session.createQuery(query).uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return object;
+    }
 //    
 //    public boolean getProfilesId(Object user){
 //        boolean hasil = false;
@@ -250,6 +270,12 @@ public class FunctionDAO {
         return rs;
     }
 
+    /**
+     * mengambil attribut universitas dan jurusan
+     * @param table
+     * @param user
+     * @return 
+     */
     public Object getAttributPendidikan(Object table, Object user) {
         Object object = null;
         String query = "";
@@ -279,6 +305,11 @@ public class FunctionDAO {
         return object;
     }
 
+    /**
+     * Mengambil attribut nama dari table requirements
+     * @param user
+     * @return 
+     */
     public Object getAttributReq(Object user) {
         Object object = null;
         String query = "from Requirements where NAMA= '" + user + "'";
@@ -301,6 +332,11 @@ public class FunctionDAO {
         return object;
     }
     
+    /**
+     * mengambil lowongan pekerjaan sesuai ID
+     * @param user
+     * @return 
+     */
     public LowonganPekerjaan getLoker(Object user) {
         LowonganPekerjaan object = null;
         String query = "from LowonganPekerjaan where ID= " + user;
@@ -321,6 +357,11 @@ public class FunctionDAO {
         return object;
     }
     
+    /**
+     * Mengambil id dari table bahasa sesuai nama bahasa
+     * @param user
+     * @return 
+     */
     public Bahasa getBahasa(Object user) {
         Bahasa object = null;
         String query = "from Bahasa where NAMA= '" + user + "'";
@@ -340,4 +381,79 @@ public class FunctionDAO {
         }
         return object;
     }
+    
+    /**
+     * Fungsi untuk melihat lowongan sesuai id User yang di apply
+     * @param user
+     * @return 
+     */
+    public LowonganPekerjaan getUserApply(Object user) {
+        LowonganPekerjaan object = null;
+        String query = "from LowonganPekerjaan where USER_ID= " + user;
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            object = (LowonganPekerjaan) session.createQuery(query).uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return object;
+    }
+    
+    /**
+     * get list data loker sesuai isDelete
+     * @return 
+     */
+    public List<Object> getLokerIsDelete() {
+        List<Object> rs = new ArrayList<>();
+        String query = "From LowonganPekerjaan where ISDELETE=1";
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            rs = session.createQuery(query).list();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return rs;
+    }
+    
+    /**
+     * getList data User apply loker sesuai idUser
+     * @return 
+     */
+    public List<Object> getViewUserApply(Object id) {
+        List<Object> rs = new ArrayList<>();
+        String query = "From Apply where USER_ID=" + id;
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            rs = session.createQuery(query).list();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return rs;
+    }
+    
+    
 }
