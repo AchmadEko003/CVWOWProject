@@ -16,8 +16,12 @@ public interface UserProfileInterface {
     public List<Object> search(String keyword);
 
     public boolean inputData(String nama, String umur, String alamat, String tanggalLahir, String noTelpon, String foto, String cv, String ktp, String userId);
+    
+    public boolean update(String id, String nama, String umur, String alamat, String tanggalLahir, String noTelpon, String foto, String cv, String ktp, String userId);
 
     public Object getById(Object id);
+    
+    public Object getProfileIdByID(Object id);
     
     public Object getIdProfileIdUser(Object id);
 }

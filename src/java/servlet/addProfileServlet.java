@@ -69,10 +69,10 @@ public class addProfileServlet extends HttpServlet {
 //            String a = encodeToString("C:/Users/Nitani/Downloads/METRODATA/SPKWT Achmad Eko Julianto.pdf");
 //            out.print("<img src='data:image/png;base64," + a + "' style='width:500px; height:500px;'/>");
 //            out.print("<embed src='data:application/pdf;base64," + a + "' width='100%' height='100%'>");
-            out.print(i.inputData(nama, umur, alamat, tanggal, noTelp, encodeToString(foto), encodeToString(cv), encodeToString(ktp), r.getId().toString()));
-//            if (i.inputData(nama, umur, alamat, tanggal, noTelp, encodeToString(foto), encodeToString(cv), encodeToString(ktp), r.getId().toString())) {
-//                response.sendRedirect("index.jsp");
-//            }
+//            out.print(i.inputData(nama, umur, alamat, tanggal, noTelp, encodeToString(foto), encodeToString(cv), encodeToString(ktp), r.getId().toString()));
+            if (i.inputData(nama, umur, alamat, tanggal, noTelp, encodeToString(foto), encodeToString(cv), encodeToString(ktp), r.getId().toString())) {
+                response.sendRedirect("index.jsp");
+            }
         }
     }
     

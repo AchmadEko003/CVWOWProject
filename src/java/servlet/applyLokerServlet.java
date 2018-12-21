@@ -56,7 +56,7 @@ public class applyLokerServlet extends HttpServlet {
             session.setAttribute("idsa", r);
             User ra = (User) session.getAttribute("userData");
             if (ia.insert("Apply", id, ra.getId().toString())) {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("Partials/User/lowonganUser.jsp");
             }
         }
     }

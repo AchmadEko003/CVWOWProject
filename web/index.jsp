@@ -58,7 +58,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-info sticky-top">
             <button type="button" class="btn btn-light">
                 <a href="index.jsp">
-                    <img src="./Assets/MII-logo.png" alt="Logo" style="width:40px;">
+                    <img src="assets/MII-logo.png" alt="Logo" style="width:40px;">
                 </a>
             </button>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

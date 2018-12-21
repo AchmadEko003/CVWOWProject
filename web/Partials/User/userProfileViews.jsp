@@ -40,27 +40,27 @@
                 <div class="form-group">
                     <!--<i class="fas fa-user"></i>-->
                     <label for="exampleInputEmail1">Name</label>
-                    <input name="nama" type="text" class="form-control" aria-describedby="name" placeholder="Nama">
+                    <input name="nama" type="text" class="form-control" aria-describedby="name" placeholder="Nama" value="<%= namaa %>">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-envelope"></i>-->
                     <label for="exampleInputEmail1">Umur</label>
-                    <input name="umur" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Umur">
+                    <input name="umur" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Umur" value="<%= umur %>">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">alamat</label>
-                    <textarea name="alamat" class="form-control" placeholder="Alamat"></textarea>
+                    <textarea name="alamat" class="form-control" placeholder="Alamat" value="<%= alamat %>"></textarea>
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">Tanggal lahir</label>
-                    <input name="tglLahir" type="date" class="form-control">
+                    <input name="tglLahir" type="date" class="form-control" value="<%= ttl %>">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->
                     <label for="exampleInputPassword1">No Telp</label>
-                    <input name="telp" type="text" class="form-control" placeholder="Nomor Telepon">
+                    <input name="telp" type="text" class="form-control" placeholder="Nomor Telepon" value="<%= telp %>">
                 </div>
                 <div class="form-group">
                     <!--<i class="fas fa-lock"></i>-->

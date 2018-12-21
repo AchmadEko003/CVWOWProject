@@ -47,7 +47,7 @@ public class editUserProfileServlet extends HttpServlet {
             Object r = ui.getIdProfileIdUser(Id);
             UserProfile up = (UserProfile) r;
             session.setAttribute("profileUser", up);
-            response.sendRedirect("Partuaks/User/userProfileViews.jsp");
+            response.sendRedirect("Partials/User/userProfileViews_1.jsp");
         }
     }
 

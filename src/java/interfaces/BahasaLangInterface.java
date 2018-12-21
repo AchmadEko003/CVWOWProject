@@ -15,7 +15,7 @@ import java.util.List;
 public interface BahasaLangInterface {
     public List<Object> search(String keyword);
 
-    public boolean insert(String user, String bahasa);
+    public boolean insert(String user, String bahasa, String rate);
 
     public boolean delete(String id, String nama);
     

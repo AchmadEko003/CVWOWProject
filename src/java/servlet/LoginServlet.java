@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
                 LokerInterface li = new LokerController(HibernateUtil.getSessionFactory());
                 List<Object> datas = li.search();
                 session.setAttribute("lokerData", datas);
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("Partials/User/userHome.jsp");
             } else {
                 out.print("gagal");
             }

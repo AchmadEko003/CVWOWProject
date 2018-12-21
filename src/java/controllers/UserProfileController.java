@@ -66,7 +66,7 @@ public class UserProfileController implements UserProfileInterface {
                 hasil = true;
             }
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         return hasil;
     }
@@ -79,5 +79,30 @@ public class UserProfileController implements UserProfileInterface {
     @Override
     public Object getIdProfileIdUser(Object id) {
         return this.daoid.getIdProfileIdUser(id);
+    }
+
+    @Override
+    public boolean update(String id, String nama, String umur, String alamat, String tanggalLahir, String noTelpon, String foto, String cv, String ktp, String userId) {
+        boolean hasil = false;
+        try {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            Date dates = format.parse(tanggalLahir);
+            byte[] a = foto.getBytes();
+            byte[] b = cv.getBytes();
+            byte[] c = ktp.getBytes();
+            UserProfile up = new UserProfile(Integer.valueOf(id), nama, Integer.valueOf(umur), alamat, dates, Integer.valueOf(noTelpon), a, b, c, new User(Integer.valueOf(userId)));
+            
+            if (daoid.doDML(up, false)) {
+                hasil = true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return hasil;
+    }
+
+    @Override
+    public Object getProfileIdByID(Object id) {
+        return this.daoid.getProfileIdByID(id);
     }
 }

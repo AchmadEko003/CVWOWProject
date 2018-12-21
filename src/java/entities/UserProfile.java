@@ -7,9 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,12 +19,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,21 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "UserProfile.findByTanggalLahir", query = "SELECT u FROM UserProfile u WHERE u.tanggalLahir = :tanggalLahir")
     , @NamedQuery(name = "UserProfile.findByNoTelpon", query = "SELECT u FROM UserProfile u WHERE u.noTelpon = :noTelpon")})
 public class UserProfile implements Serializable {
-
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "FOTO")
-    private byte[] foto;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "CV")
-    private byte[] cv;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "KTP")
-    private byte[] ktp;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUserProfile", fetch = FetchType.LAZY)
-    private List<BahasaLang> bahasaLangList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -82,6 +63,18 @@ public class UserProfile implements Serializable {
     @Basic(optional = false)
     @Column(name = "NO_TELPON")
     private int noTelpon;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "FOTO")
+    private byte[] foto;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "CV")
+    private byte[] cv;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "KTP")
+    private byte[] ktp;
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
@@ -105,7 +98,7 @@ public class UserProfile implements Serializable {
         this.userId = userId;
     }
 
-    public UserProfile(Integer id, String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp) {
+    public UserProfile(Integer id, String nama, int umur, String alamat, Date tanggalLahir, int noTelpon, byte[] foto, byte[] cv, byte[] ktp, User userId) {
         this.id = id;
         this.nama = nama;
         this.umur = umur;
@@ -115,6 +108,7 @@ public class UserProfile implements Serializable {
         this.foto = foto;
         this.cv = cv;
         this.ktp = ktp;
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -165,6 +159,29 @@ public class UserProfile implements Serializable {
         this.noTelpon = noTelpon;
     }
 
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public byte[] getCv() {
+        return cv;
+    }
+
+    public void setCv(byte[] cv) {
+        this.cv = cv;
+    }
+
+    public byte[] getKtp() {
+        return ktp;
+    }
+
+    public void setKtp(byte[] ktp) {
+        this.ktp = ktp;
+    }
 
     public User getUserId() {
         return userId;
@@ -197,39 +214,6 @@ public class UserProfile implements Serializable {
     @Override
     public String toString() {
         return "entities.UserProfile[ id=" + id + " ]";
-    }
-
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
-    public byte[] getCv() {
-        return cv;
-    }
-
-    public void setCv(byte[] cv) {
-        this.cv = cv;
-    }
-
-    public byte[] getKtp() {
-        return ktp;
-    }
-
-    public void setKtp(byte[] ktp) {
-        this.ktp = ktp;
-    }
-
-    @XmlTransient
-    public List<BahasaLang> getBahasaLangList() {
-        return bahasaLangList;
-    }
-
-    public void setBahasaLangList(List<BahasaLang> bahasaLangList) {
-        this.bahasaLangList = bahasaLangList;
     }
     
 }

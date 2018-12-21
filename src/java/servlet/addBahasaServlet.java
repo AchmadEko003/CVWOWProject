@@ -42,6 +42,7 @@ public class addBahasaServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String nama = request.getParameter("nama");
+        String rate = request.getParameter("a");
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
             SessionFactory SessionFactory = new HibernateUtil().getSessionFactory();
@@ -50,7 +51,9 @@ public class addBahasaServlet extends HttpServlet {
             Bahasa b = (Bahasa) i.getById(nama);
             out.print(b.getId());
             out.print(nama);
-            if (i.insert(r.getId().toString(), b.getId().toString())); {
+            out.print(rate);
+            
+            if (i.insert(r.getId().toString(), b.getId().toString(), rate)); {
                 response.sendRedirect("index.jsp");
             }
         }

@@ -19,6 +19,7 @@ import controllers.UserController;
 import controllers.UserProfileController;
 import entities.LowonganPekerjaan;
 import entities.User;
+import entities.UserProfile;
 import interfaces.ApplyInterface;
 import interfaces.BahasaLangInterface;
 import interfaces.JurusanInterface;
@@ -61,10 +62,13 @@ public class test {
 //        UniversitasInterface universitasInterface = new UniversitasController(factory);
 //        JurusanInterface ji = new JurusanController(factory);
 //        BahasaLangInterface bli = new BahasaLangController(factory);
-
-        String a = "C:\\Users\\Nitani\\Downloads\\METRODATA\\wr.jpg";
-        String b = "C:\\Users\\Nitani\\Downloads\\METRODATA\\14415 - Achmad Eko Julianto.pdf";
-        String c = "C:\\Users\\Nitani\\Downloads\\METRODATA\\Data Karyawan\\ktp.jpg";
+        
+        System.out.println(upi.getProfileIdByID("18"));
+//        String a = "C:\\Users\\Nitani\\Downloads\\METRODATA\\wr.jpg";
+//        String b = "C:\\Users\\Nitani\\Downloads\\METRODATA\\14415 - Achmad Eko Julianto.pdf";
+//        String c = "C:\\Users\\Nitani\\Downloads\\METRODATA\\Data Karyawan\\ktp.jpg";
+//        
+//        System.out.println();
 //        System.out.println(ui.getAttributApplyUser("6"));
 //        System.out.println(bli.insert("9", "1"));
 //        System.out.println(ji.getById("TEKNIK ELEKTRO"));
@@ -74,8 +78,9 @@ public class test {
 //        System.out.println(emp.insert("222", "a", "b", "fsfes", "2301293", "08/08/2009", "IT_PROG", "5000", "0.0", "100", "100"));
 //        System.out.println(emp.getById("220"));
 //        System.out.println(ui.register("eko","achmadeko003@gmail.com","ekoeko123"));
-        boolean as = upi.inputData("Achmad Eko", "22", "Jl.Nogogini", "1996-07-16", "082221383227", encodeToString(a), encodeToString(b), encodeToString(c), "12");
-        System.out.println(as);
+//        boolean as = upi.update("9", "Achmad Eko", "22", "Jl.Nogogini", "1996-07-16", "123", encodeToString(a), "", "", "12");
+//        boolean ass = upi.update("9", "Achmad Eko", "22", "Jl.Nogogini", "1996-07-16", "123", encodeToString(a), "", encodeToString(c), "12");
+//        System.out.println(ass);        
 //        System.out.println(si.delete("7", "aa", "va"));
 //        System.out.println(li.delete("7", "Test", "Testing Error", "2018-12-17", "2018-12-20", "2", "5"));
 //        System.out.println(li.insert("Daw", "da", "2018-12-17", "2", "12"));

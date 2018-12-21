@@ -121,4 +121,9 @@ public class GeneralDAO implements DAOInterface {
     public List<Object> getViewUserApply(Object id) {
         return this.fdao.getViewUserApply(id);
     }
+
+    @Override
+    public Object getProfileIdByID(Object id) {
+        return this.fdao.getProfileIdByID(id);
+    }
 }

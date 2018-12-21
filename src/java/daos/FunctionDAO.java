@@ -217,6 +217,26 @@ public class FunctionDAO {
         }
         return object;
     }
+    
+    public UserProfile getProfileIdByID(Object user) {
+        UserProfile object = null;
+        String query = "from UserProfile where ID= " + user;
+        System.out.println(query);
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            object = (UserProfile) session.createQuery(query).uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return object;
+    }
 
     public UserProfile getProfileIdUser(Object user) {
         UserProfile object = null;
